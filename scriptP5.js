@@ -2,7 +2,7 @@ var default_stroke_size = 3;
 var bg_r, bg_g, bg_b;
 var stroke_size;
 
-PImage icons = [];
+// PImage icons = [];
 Box menu = [];
 Box marker_sz = [];
 Box colors = [];
@@ -122,9 +122,9 @@ void init_color_list() {
 // called every frame to keep the menu up
 void draw_menu() {
   stroke(0);
-  icons = new PImage[2];
-  icons[0] = loadImage("free_hand_icon.png");
-  icons[1] = loadImage("eraser_icon.png");
+  // icons = new PImage[2];
+  // icons[0] = loadImage("free_hand_icon.png");
+  // icons[1] = loadImage("eraser_icon.png");
 
   // draw default tool menu
   for (int i=0; i < menu.length; i++) {
