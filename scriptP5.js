@@ -7,11 +7,10 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   background(0, 0, 0);
   menu_open = false;
-  imgTools = loadImage('images/burger_button.jpg');
-  button = createButton('Tools');
+  imgTools = createImg('images/burger_button.png');
   // imgTools.style();
-  button.position(10,10);
-  button.mousePressed(openNav);
+  imgTools.position(10,10);
+  imgTools.mousePressed(openNav);
   // imgTools.parent(button);
 }
 
@@ -25,7 +24,6 @@ function draw() {
     fill(r, g, b);
     // ellipse(pmouseX, pmouseY, size, size);
     imageMode(CENTER);
-    image(imgTools, pmouseX, pmouseY);
   } else if(keyIsPressed){
     background(0,0,0);
   }
