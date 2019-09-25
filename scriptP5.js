@@ -23,7 +23,7 @@ function draw() {
   if(mouseIsPressed && menu_open == false){
     fill(r, g, b);
     // ellipse(pmouseX, pmouseY, size, size);
-    imageMode(CENTER);
+    // imageMode(CENTER);
   } else if(keyIsPressed){
     background(0,0,0);
   }

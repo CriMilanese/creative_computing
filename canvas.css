@@ -46,19 +46,3 @@ html, body {
   padding:0;
   overflow:hidden;
 }
-
-.p5canvas {
-  /* This centers our sketch horizontally. */
-  /* justify-content: center; */
-
-  /* This centers our sketch vertically. */
-  /* align-items: center; */
-}
-
-/* does not really work ont the element, there is a problem on interaction between
-p5.js elements and html elements */
-/* #burger_button {
-  float:left;
-   position: sticky;
-   color: white;
- } */
