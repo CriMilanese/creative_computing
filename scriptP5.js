@@ -2,16 +2,12 @@ var r, g, b;
 var menu_open = false;
 var button, imgTools;
 
-function preload(){
-  //this file is used to load images and sound and other thinks
-  // and it happens to eb run even before setup
-  imgTools = loadImage('images/burger_button.jpg');
-}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(0, 0, 0);
   menu_open = false;
+  imgTools = loadImage('images/burger_button.jpg');
   button = createButton('Tools');
   // imgTools.style();
   button.position(10,10);
