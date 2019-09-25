@@ -10,6 +10,7 @@ function setup() {
   imgTools = createImg('images/burger_button.png');
   // imgTools.style();
   imgTools.position(10,10);
+  imgTools.size();
   imgTools.mousePressed(openNav);
   // imgTools.parent(button);
 }
@@ -22,8 +23,7 @@ function draw() {
 
   if(mouseIsPressed && menu_open == false){
     fill(r, g, b);
-    // ellipse(pmouseX, pmouseY, size, size);
-    // imageMode(CENTER);
+    ellipse(pmouseX, pmouseY, size, size);
   } else if(keyIsPressed){
     background(0,0,0);
   }
