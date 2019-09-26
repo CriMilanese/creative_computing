@@ -48,6 +48,11 @@ html, body {
   overflow:hidden;
 }
 
+h2 {
+  text-align: center;
+  color: white;
+}
+
 label {
   color: #818181;
 }

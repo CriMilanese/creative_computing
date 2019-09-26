@@ -3,6 +3,7 @@ var menu_open = false;
 var strokeMenu;
 var stroke_menu_open = false;
 var pickerColor, whichShape, whatColor;
+var angle = 0;
 var button, imgTools;
 var myScale, funky;
 var ax, ay, bx, by;
@@ -30,6 +31,7 @@ function draw() {
   g = random(1, 255);
   b = random(1, 255);
   noFill();
+  angleMode(DEGREES);
   if(mouseIsPressed && menu_open == false){
     if(funky == true){
       stroke(r, g, b);
@@ -41,19 +43,26 @@ function draw() {
     switch (whichShape){
       case 'triangle':
         calcEquiVertex(pmouseX, pmouseY - size);
-        triangle(ax, ay, pmouseX, pmouseY - size, bx, by);
+        rotate(angle);
+        triangle(ax, ay, bx, by, pmouseX, pmouseY - size);
         break;
       case 'circle':
         ellipse(pmouseX, pmouseY, size, size);
         break;
       case 'square':
-        rect(pmouseX, pmouseY, size);
+        rectMode(CENTER);
+        rotate(angle);
+        rect(pmouseX, pmouseY, size, size);
         break;
       default:
         ellipse(pmouseX, pmouseY, size, size);
     }
   } else if(keyIsPressed){
     background(0,0,0);
+  }
+  angle += 10;
+  if(angle > 360){
+    angle = 0;
   }
 }
 
@@ -79,11 +88,12 @@ function largeMark(){
   strokeWeight(6);
   closeNav();
 }
-function calcEquiVertex(origX, origY, size){
-  bx = origX * cos(120 * TWO_PI/180) - ( origY * sin( 120 * TWO_PI/180 ) )
-  by = origX * sin( 120 * TWO_PI/180 ) + ( origY * cos( 120 * TWO_PI/180 ) )
-  ax = origX * cos( 240 * TWO_PI/180 ) - ( origY * sin( 240 * TWO_PI/180 ) )
-  ay = origX * sin( 240 * TWO_PI/180 ) + ( origY * cos( 240 * TWO_PI/180 ) )
+
+function calcEquiVertex(origX, origY){
+  ax = origX * cos( 120 ) - ( origY * sin( 120 ) )
+  ay = origX * sin( 120 ) + ( origY * cos( 120 ) )
+  bx = origX * cos( 240 ) - ( origY * sin( 240 ) )
+  by = origX * sin( 240 ) + ( origY * cos( 240 ) )
 }
 
 function goFunkyColor(value){
