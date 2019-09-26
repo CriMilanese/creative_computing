@@ -42,17 +42,13 @@ function draw() {
     }
     switch (whichShape){
       case 'triangle':
-        calcEquiVertex(pmouseX, pmouseY - size);
-        rotate(angle);
-        triangle(ax, ay, bx, by, pmouseX, pmouseY - size);
+        drawTriangle();
         break;
       case 'circle':
         ellipse(pmouseX, pmouseY, size, size);
         break;
       case 'square':
-        rectMode(CENTER);
-        rotate(angle);
-        rect(pmouseX, pmouseY, size, size);
+        drawSquare();
         break;
       default:
         ellipse(pmouseX, pmouseY, size, size);
@@ -64,6 +60,24 @@ function draw() {
   if(angle > 360){
     angle = 0;
   }
+}
+
+function drawTriangle(){
+  push();
+  calcEquiVertex(pmouseX, pmouseY);
+  translate(pmouseX, pmouseY);
+  rotate(angle);
+  triangle(ax, ay, bx, by, pmouseX, pmouseY - floor(size/10));
+  pop();
+}
+
+function drawSquare(){
+  push();
+  rectMode(CENTER);
+  translate(pmouseX, pmouseY);  
+  rotate(angle);
+  rect(pmouseX, pmouseY, size, size);
+  pop();
 }
 
 function openNav() {
