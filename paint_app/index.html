@@ -14,18 +14,16 @@
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 	  <a onclick="triangleTool()">Triangle</a>
 	  <a onclick="CircleTool()">Circle</a>
-	  <a onclick="BoxTool()">Box</a>
-	  <a id="howThick">thickness</a>
-		<div class="thickButtons">
+	  <a onclick="boxTool()">Square</a>
+	  <a id="howThick">Stroke</a>
+		<div class="strokeSetup" onclick="openStrokeSetup()">
 			<button type="button" onclick="smallMark()">small</button>
 			<button type="button" onclick="medMark()">medium</button>
 			<button type="button" onclick="largeMark()">large</button>
-		</div>
-		<div>
-    <input type="color" id="markerColor" name="markerColor"
-           value="#e66465">
-    <label for="markerColor">Color Picking</label>
-		<input type="checkbox" name="randomColoring" value="funky" onclick="goFunkyColor(this)"> go Funky with coloring!<br>
+    	<input type="color" id="markerColor" name="markerColor" value="#e66465">
+	    <label for="markerColor">Color Picking</label>
+			<input type="checkbox" name="randomColoring" value="funky" onclick="goFunkyColor(this)">
+			<label for="randomColoring">Funky</label>
 		</div>
 	</div>
 

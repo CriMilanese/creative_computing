@@ -1,7 +1,10 @@
 var r, g, b;
 var menu_open = false;
+var strokeMenu;
+var stroke_menu_open = false;
+var pickerColor, whichShape;
 var button, imgTools;
-var myScale, myRotation, funky;
+var myScale, funky;
 var thickButtonGroup;
 var ax, ay, bx, by;
 
@@ -16,9 +19,11 @@ function setup() {
     windowWidth / 100,
     windowHeight / 100
   );
+  pickerColor = select('#markerColor');
   imgTools.attribute('transform', 'scale(myScale)');
   imgTools.mousePressed(openNav);
   thickButtonGroup = select('.thickButtons');
+  strokeMenu = select(".strokeSetup");
 }
 
 function draw() {
@@ -28,10 +33,14 @@ function draw() {
   b = random(1, 255);
 
   if(mouseIsPressed && menu_open == false){
-    fill(r, g, b);
+    if(funky == true){
+      stroke(r, g, b);
+    } else {
+      stroke(markerColor.value());
+    }
     switch (whichShape){
       case 'triangle':
-        calcEquiVertex(pmouseX, pmouseY, size);
+        calcEquiVertex(pmouseX, pmouseY - size);
         triangle(pmouseX, pmouseY - size, ax, ay, bx, by);
         break;
       case 'circle':
@@ -41,7 +50,7 @@ function draw() {
         rect(pmouseX, pmouseY, size);
         break;
       default:
-
+        ellipse(pmouseX, pmouseY, size, size);
     }
   } else if(keyIsPressed){
     background(0,0,0);
@@ -80,9 +89,32 @@ function calcEquiVertex(origX, origY, size){
 function goFunkyColor(value){
   if(value){
     thickButtonGroup.hide();
-    fucky = true;
+    funky = true;
   } else {
     thickButtonGroup.show();
     funky = false;
   }
+}
+
+function openStrokeSetup(){
+  if(stroke_menu_open == true){
+    closeStrokeSetup();
+  }
+  stroke_menu_open = true;
+  strokeMenu.show();
+}
+
+function closeStrokeSetup(){
+  strokeMenu.hide();
+  stroke_menu_open = false;
+}
+
+function triangleTool(){
+  whichShape = "triangle";
+}
+function circleTool(){
+  whichShape = "triangle";
+}
+function boxTool(){
+  whichShape = "triangle";
 }
