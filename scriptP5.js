@@ -1,6 +1,10 @@
 var r, g, b;
 var menu_open = false;
 var button, imgTools;
+var myScale = Math.min(
+  availableWidth / contentWidth,
+  availableHeight / contentHeight
+);
 
 
 function setup() {
@@ -10,7 +14,7 @@ function setup() {
   imgTools = createImg('images/burger_button.png');
   // imgTools.style();
   imgTools.position(10,10);
-  imgTools.size();
+  imgTools.attribute('transform', 'scale(mySscale)');
   imgTools.mousePressed(openNav);
   // imgTools.parent(button);
 }
