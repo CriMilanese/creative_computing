@@ -2,7 +2,7 @@ var r, g, b;
 var menu_open = false;
 var strokeMenu;
 var stroke_menu_open = false;
-var pickerColor, whichShape;
+var pickerColor, whichShape, whatColor;
 var button, imgTools;
 var myScale, funky;
 var thickButtonGroup;
@@ -36,7 +36,9 @@ function draw() {
     if(funky == true){
       stroke(r, g, b);
     } else {
-      stroke(markerColor.value());
+      whatColor = pickerColor.value();
+      print(whatColor);
+      stroke(whatColor);
     }
     switch (whichShape){
       case 'triangle':
@@ -99,9 +101,10 @@ function goFunkyColor(value){
 function openStrokeSetup(){
   if(stroke_menu_open == true){
     closeStrokeSetup();
+  } else {
+    stroke_menu_open = true;
+    strokeMenu.show();
   }
-  stroke_menu_open = true;
-  strokeMenu.show();
 }
 
 function closeStrokeSetup(){
