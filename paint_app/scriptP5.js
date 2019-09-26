@@ -5,7 +5,6 @@ var stroke_menu_open = false;
 var pickerColor, whichShape, whatColor;
 var button, imgTools;
 var myScale, funky;
-var thickButtonGroup;
 var ax, ay, bx, by;
 
 function setup() {
@@ -22,7 +21,6 @@ function setup() {
   pickerColor = select('#markerColor');
   imgTools.attribute('transform', 'scale(myScale)');
   imgTools.mousePressed(openNav);
-  thickButtonGroup = select('.thickButtons');
   strokeMenu = select(".strokeSetup");
 }
 
@@ -90,10 +88,8 @@ function calcEquiVertex(origX, origY, size){
 
 function goFunkyColor(value){
   if(value){
-    thickButtonGroup.hide();
     funky = true;
   } else {
-    thickButtonGroup.show();
     funky = false;
   }
 }
@@ -117,10 +113,10 @@ function triangleTool(){
   closeNav();
 }
 function circleTool(){
-  whichShape = "triangle";
+  whichShape = "circle";
   closeNav();
 }
 function boxTool(){
-  whichShape = "triangle";
+  whichShape = "square";
   closeNav();
 }
