@@ -31,7 +31,7 @@ function draw() {
   r = random(1, 255);
   g = random(1, 255);
   b = random(1, 255);
-
+  noFill();
   if(mouseIsPressed && menu_open == false){
     if(funky == true){
       stroke(r, g, b);
@@ -43,7 +43,7 @@ function draw() {
     switch (whichShape){
       case 'triangle':
         calcEquiVertex(pmouseX, pmouseY - size);
-        triangle(pmouseX, pmouseY - size, ax, ay, bx, by);
+        triangle(ax, ay, pmouseX, pmouseY - size, bx, by);
         break;
       case 'circle':
         ellipse(pmouseX, pmouseY, size, size);
@@ -61,7 +61,7 @@ function draw() {
 
 function openNav() {
   menu_open = true;
-  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("mySidenav").style.width = "200px";
 }
 
 function closeNav() {
@@ -114,10 +114,13 @@ function closeStrokeSetup(){
 
 function triangleTool(){
   whichShape = "triangle";
+  closeNav();
 }
 function circleTool(){
   whichShape = "triangle";
+  closeNav();
 }
 function boxTool(){
   whichShape = "triangle";
+  closeNav();
 }
