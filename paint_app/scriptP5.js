@@ -1,22 +1,24 @@
 var r, g, b;
 var menu_open = false;
 var button, imgTools;
-var myScale = Math.min(
-  availableWidth / contentWidth,
-  availableHeight / contentHeight
-);
-
+var myScale, myRotation, funky;
+var thickButtonGroup;
+var ax, ay, bx, by;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(0, 0, 0);
   menu_open = false;
   imgTools = createImg('images/burger_button.png');
-  // imgTools.style();
   imgTools.position(10,10);
-  imgTools.attribute('transform', 'scale(mySscale)');
+  imgTools.size(100, 100);
+  myScale = Math.min(
+    windowWidth / 100,
+    windowHeight / 100
+  );
+  imgTools.attribute('transform', 'scale(myScale)');
   imgTools.mousePressed(openNav);
-  // imgTools.parent(button);
+  thickButtonGroup = select('.thickButtons');
 }
 
 function draw() {
@@ -27,7 +29,20 @@ function draw() {
 
   if(mouseIsPressed && menu_open == false){
     fill(r, g, b);
-    ellipse(pmouseX, pmouseY, size, size);
+    switch (whichShape){
+      case 'triangle':
+        calcEquiVertex(pmouseX, pmouseY, size);
+        triangle(pmouseX, pmouseY - size, ax, ay, bx, by);
+        break;
+      case 'circle':
+        ellipse(pmouseX, pmouseY, size, size);
+        break;
+      case 'square':
+        rect(pmouseX, pmouseY, size);
+        break;
+      default:
+
+    }
   } else if(keyIsPressed){
     background(0,0,0);
   }
@@ -41,4 +56,33 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   menu_open = false;
+}
+
+function smallMark(){
+  strokeWeight(2);
+  closeNav();
+}
+function medMark(){
+  strokeWeight(4);
+  closeNav();
+}
+function largeMark(){
+  strokeWeight(6);
+  closeNav();
+}
+function calcEquiVertex(origX, origY, size){
+  bx = origX * cos(120 * TWO_PI/180) - ( origY * sin( 120 * TWO_PI/180 ) )
+  by = origX * sin( 120 * TWO_PI/180 ) + ( origY * cos( 120 * TWO_PI/180 ) )
+  ax = origX * cos( 240 * TWO_PI/180 ) - ( origY * sin( 240 * TWO_PI/180 ) )
+  ay = origX * sin( 240 * TWO_PI/180 ) + ( origY * cos( 240 * TWO_PI/180 ) )
+}
+
+function goFunkyColor(value){
+  if(value){
+    thickButtonGroup.hide();
+    fucky = true;
+  } else {
+    thickButtonGroup.show();
+    funky = false;
+  }
 }
