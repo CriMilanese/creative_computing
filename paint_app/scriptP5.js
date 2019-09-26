@@ -42,13 +42,13 @@ function draw() {
     }
     switch (whichShape){
       case 'triangle':
-        drawTriangle();
+        drawTriangle(size);
         break;
       case 'circle':
         ellipse(pmouseX, pmouseY, size, size);
         break;
       case 'square':
-        drawSquare();
+        drawSquare(size);
         break;
       default:
         ellipse(pmouseX, pmouseY, size, size);
@@ -62,21 +62,21 @@ function draw() {
   }
 }
 
-function drawTriangle(){
+function drawTriangle(sz){
   push();
   calcEquiVertex(pmouseX, pmouseY);
   translate(pmouseX, pmouseY);
   rotate(angle);
-  triangle(ax, ay, bx, by, pmouseX, pmouseY - floor(size/10));
+  triangle(ax, ay, bx, by, pmouseX, pmouseY - floor(sz/10));
   pop();
 }
 
-function drawSquare(){
+function drawSquare(sz){
   push();
   rectMode(CENTER);
-  translate(pmouseX, pmouseY);  
+  translate(pmouseX, pmouseY);
   rotate(angle);
-  rect(pmouseX, pmouseY, size, size);
+  rect(pmouseX, pmouseY, sz, sz);
   pop();
 }
 
