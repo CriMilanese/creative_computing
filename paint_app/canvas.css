@@ -42,14 +42,16 @@
 }
 
 .sidenav .strokeSetup {
-  background-color: #818181;
-  border: 1px solid #818160;
-  color: white;
+
   padding: 10px 10px 10px 10px; /* Some padding */
   cursor: pointer; /* Pointer/hand icon */
+  width: auto;
+}
+
+.sidenav button {
   float: left; /* Float the buttons side by side */
   height: 20px;
-  width: auto;
+  border: 1px solid #818181;
 }
 
 .sidenav input {
@@ -79,9 +81,9 @@ label {
 }
 
 button:hover{
-  background-color: #4CAF00
+  background-color: #818110;
 }
 
 span {
-  margin: 20px;
+  margin-top: 20px;
 }
