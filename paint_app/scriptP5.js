@@ -59,14 +59,14 @@ function draw() {
       default:
         ellipse(pmouseX, pmouseY, size, size);
     }
-  } else if(keyIsPressed){
-    if(keyCode == BACKSPACE){
-      background(0,0,0);
+    angle += 10;
+    if(angle > 360){
+      angle = 0;
     }
-  }
-  angle += 10;
-  if(angle > 360){
-    angle = 0;
+  } else if(keyIsPressed){
+      if(keyCode == BACKSPACE){
+        background(0,0,0);
+      }
   }
 }
 
