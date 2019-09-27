@@ -6,7 +6,7 @@ var pickerColor, whichShape, whatColor;
 var angle = 0;
 var button, imgTools;
 var myScale, funky;
-var ax, ay, bx, by;
+var ax, ay, bx, by, cx, cy;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -23,6 +23,7 @@ function setup() {
   imgTools.attribute('transform', 'scale(myScale)');
   imgTools.mousePressed(openNav);
   strokeMenu = select(".strokeSetup");
+  rectMode(CENTER);
 }
 
 function draw() {
@@ -67,16 +68,15 @@ function drawTriangle(sz){
   calcEquiVertex(pmouseX, pmouseY);
   translate(pmouseX, pmouseY);
   rotate(angle);
-  triangle(ax, ay, bx, by, pmouseX, pmouseY - floor(sz/10));
+  triangle(ax, ay, bx, by, cx, cy);
   pop();
 }
 
 function drawSquare(sz){
   push();
-  rectMode(CENTER);
   translate(pmouseX, pmouseY);
   rotate(angle);
-  rect(pmouseX, pmouseY, sz, sz);
+  rect(0, 0, sz, sz);
   pop();
 }
 
@@ -104,10 +104,12 @@ function largeMark(){
 }
 
 function calcEquiVertex(origX, origY){
-  ax = origX * cos( 120 ) - ( origY * sin( 120 ) )
-  ay = origX * sin( 120 ) + ( origY * cos( 120 ) )
-  bx = origX * cos( 240 ) - ( origY * sin( 240 ) )
-  by = origX * sin( 240 ) + ( origY * cos( 240 ) )
+  cx = pmouseX;
+  cy = pmouseY - floor(sz/10);
+  ax = cx * cos( 120 ) - ( cy * sin( 120 ) );
+  ay = cx * sin( 120 ) + ( cy * cos( 120 ) );
+  bx = cx * cos( 240 ) - ( cy * sin( 240 ) );
+  by = cx * sin( 240 ) + ( cy * cos( 240 ) );
 }
 
 function goFunkyColor(value){
