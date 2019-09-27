@@ -119,7 +119,7 @@ function calcEquiVertex(sz){
 }
 
 function goFunkyColor(click){
-  if(funkyBox.value()){
+  if(funkyBox.checked()){
     funky = true;
   } else {
     funky = false;
