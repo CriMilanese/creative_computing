@@ -51,6 +51,7 @@ html, body {
 h2 {
   text-align: center;
   color: white;
+  cursor: hand;
 }
 
 label {
@@ -58,10 +59,10 @@ label {
 }
 
 .thickButtons {
-  background-color: #818181; /* Green background */
-  border: 1px solid #818181; /* Green border */
-  color: white; /* White text */
-  padding: 10px 10px; /* Some padding */
+  background-color: #818181;
+  border: 1px solid #818181;
+  color: white;
+  padding: 10px 10px 10px 10px; /* Some padding */
   cursor: pointer; /* Pointer/hand icon */
   float: left; /* Float the buttons side by side */
 }

@@ -23,11 +23,12 @@ function setup() {
     windowHeight / 100
   );
   pickerColor = select('#markerColor');
-  // imgTools.attribute('transform', 'scale(myScale)')
   imgTools.mousePressed(openNav);
   imgSave.mousePressed(saveFile);
   strokeMenu = select(".strokeSetup");
   rectMode(CENTER);
+  noFill();
+  angleMode(DEGREES);
 }
 
 function draw() {
@@ -35,14 +36,12 @@ function draw() {
   r = random(1, 255);
   g = random(1, 255);
   b = random(1, 255);
-  noFill();
-  angleMode(DEGREES);
+  funky = goFunkyColor();
   if(mouseIsPressed && menu_open == false){
     if(funky == true){
       stroke(r, g, b);
     } else {
       whatColor = pickerColor.value();
-      print(whatColor);
       stroke(whatColor);
     }
     switch (whichShape){
@@ -118,9 +117,9 @@ function calcEquiVertex(sz){
 
 function goFunkyColor(value){
   if(value){
-    funky = true;
+    return true;
   } else {
-    funky = false;
+    return false;
   }
 }
 
@@ -152,5 +151,7 @@ function boxTool(){
 }
 
 function saveFile(){
-  save('myArt', 'png');
+  saving = true;
+  saveCanvas('myArtOnCanvas', 'png');
+  saving = false;
 }
