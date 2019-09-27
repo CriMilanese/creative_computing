@@ -15,11 +15,17 @@ function setup() {
   imgTools = createImg('images/burger_button.png');
   imgSave = createImg('images/saveFile.png');
   imgTools.position(10,10);
-  imgSave.size(100, 100)
   imgSave.position(windowWidth - 110, 10)
   imgTools.size(100, 100);
+  imgSave.size(100, 100);
+  myScale = Math.min(
+    windowWidth / 100,
+    windowHeight / 100
+  );
   pickerColor = select('#markerColor');
+  // imgTools.attribute('transform', 'scale(myScale)')
   imgTools.mousePressed(openNav);
+  imgSave.mousePressed(saveFile);
   strokeMenu = select(".strokeSetup");
   rectMode(CENTER);
 }
@@ -31,7 +37,6 @@ function draw() {
   b = random(1, 255);
   noFill();
   angleMode(DEGREES);
-  responsiveButtons();
   if(mouseIsPressed && menu_open == false){
     if(funky == true){
       stroke(r, g, b);
@@ -119,15 +124,6 @@ function goFunkyColor(value){
   }
 }
 
-function responsiveButtons(){
-  myScale = Math.min(
-    windowWidth / 100,
-    windowHeight / 100
-  );
-  imgTools.scale(myScale);
-  saveFile.scale(myScale);
-}
-
 function toggleStrokeSetup(){
   if(stroke_menu_open == true){
     closeStrokeSetup();
@@ -153,4 +149,8 @@ function circleTool(){
 function boxTool(){
   whichShape = "square";
   closeNav();
+}
+
+function saveFile(){
+  save('myArt', 'png');
 }
