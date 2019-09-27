@@ -38,6 +38,7 @@ function draw() {
   b = random(1, 255);
   funky = goFunkyColor();
   if(mouseIsPressed && menu_open == false){
+    print(funky);
     if(funky == true){
       stroke(r, g, b);
     } else {
@@ -58,7 +59,9 @@ function draw() {
         ellipse(pmouseX, pmouseY, size, size);
     }
   } else if(keyIsPressed){
-    background(0,0,0);
+    if(keyCode == BACKSPACE){
+      background(0,0,0);
+    }
   }
   angle += 10;
   if(angle > 360){

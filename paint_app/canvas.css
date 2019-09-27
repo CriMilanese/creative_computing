@@ -25,6 +25,7 @@
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover h2:hover {
   color: #f1f1f1;
+  cursor: grab;
 }
 
 /* Position and style the close button (top right corner) */
@@ -51,7 +52,6 @@ html, body {
 h2 {
   text-align: center;
   color: white;
-  cursor: hand;
 }
 
 label {
