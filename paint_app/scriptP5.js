@@ -65,7 +65,7 @@ function draw() {
 
 function drawTriangle(sz){
   push();
-  calcEquiVertex(pmouseX, pmouseY);
+  calcEquiVertex(pmouseX, pmouseY, sz);
   translate(pmouseX, pmouseY);
   rotate(angle);
   triangle(ax, ay, bx, by, cx, cy);
@@ -103,7 +103,7 @@ function largeMark(){
   closeNav();
 }
 
-function calcEquiVertex(origX, origY){
+function calcEquiVertex(origX, origY, sz){
   cx = pmouseX;
   cy = pmouseY - floor(sz/10);
   ax = cx * cos( 120 ) - ( cy * sin( 120 ) );
