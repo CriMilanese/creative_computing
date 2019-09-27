@@ -36,7 +36,6 @@ function draw() {
   r = random(1, 255);
   g = random(1, 255);
   b = random(1, 255);
-  funky = goFunkyColor();
   if(mouseIsPressed && menu_open == false){
     print(funky);
     if(funky == true){
@@ -118,11 +117,11 @@ function calcEquiVertex(sz){
   by = cx * sin( 240 ) + ( cy * cos( 240 ) );
 }
 
-function goFunkyColor(value){
-  if(value){
-    return true;
+function goFunkyColor(click){
+  if(click.value()){
+    funky = true;
   } else {
-    return false;
+    funky = false;
   }
 }
 
