@@ -1,4 +1,4 @@
-var r, g, b;
+var r, g, b, size;
 var menu_open = false;
 var strokeMenu;
 var stroke_menu_open = false;
@@ -34,18 +34,17 @@ function setup() {
 }
 
 function draw() {
-  var size = random(5, 50);
-  r = random(1, 255);
-  g = random(1, 255);
-  b = random(1, 255);
   if(mouseIsPressed && menu_open == false){
-    print(funky);
     if(funky == true){
+      r = random(1, 255);
+      g = random(1, 255);
+      b = random(1, 255);
       stroke(r, g, b);
     } else {
       whatColor = pickerColor.value();
       stroke(whatColor);
     }
+    size = random(5, 50);
     switch (whichShape){
       case 'triangle':
         drawTriangle(size);
