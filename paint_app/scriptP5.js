@@ -4,7 +4,7 @@ var strokeMenu;
 var stroke_menu_open = false;
 var pickerColor, whichShape, whatColor;
 var angle = 0;
-var button, imgTools;
+var button, imgTools, imgSave;
 var myScale, funky;
 var ax, ay, bx, by, cx, cy;
 
@@ -13,14 +13,12 @@ function setup() {
   background(0, 0, 0);
   menu_open = false;
   imgTools = createImg('images/burger_button.png');
+  imgSave = createImg('images/saveFile.png');
   imgTools.position(10,10);
+  imgSave.size(100, 100)
+  imgSave.position(windowWidth - 110, 10)
   imgTools.size(100, 100);
-  myScale = Math.min(
-    windowWidth / 100,
-    windowHeight / 100
-  );
   pickerColor = select('#markerColor');
-  imgTools.attribute('transform', 'scale(myScale)');
   imgTools.mousePressed(openNav);
   strokeMenu = select(".strokeSetup");
   rectMode(CENTER);
@@ -33,6 +31,7 @@ function draw() {
   b = random(1, 255);
   noFill();
   angleMode(DEGREES);
+  responsiveButtons();
   if(mouseIsPressed && menu_open == false){
     if(funky == true){
       stroke(r, g, b);
@@ -65,7 +64,7 @@ function draw() {
 
 function drawTriangle(sz){
   push();
-  calcEquiVertex(pmouseX, pmouseY, sz);
+  calcEquiVertex(sz);
   translate(pmouseX, pmouseY);
   rotate(angle);
   triangle(ax, ay, bx, by, cx, cy);
@@ -103,9 +102,9 @@ function largeMark(){
   closeNav();
 }
 
-function calcEquiVertex(origX, origY, sz){
+function calcEquiVertex(sz){
   cx = 0;
-  cy = 0 - floor(sz/10);
+  cy = 0 - sz;
   ax = cx * cos( 120 ) - ( cy * sin( 120 ) );
   ay = cx * sin( 120 ) + ( cy * cos( 120 ) );
   bx = cx * cos( 240 ) - ( cy * sin( 240 ) );
@@ -120,7 +119,16 @@ function goFunkyColor(value){
   }
 }
 
-function openStrokeSetup(){
+function responsiveButtons(){
+  myScale = Math.min(
+    windowWidth / 100,
+    windowHeight / 100
+  );
+  imgTools.scale(myScale);
+  saveFile.scale(myScale);
+}
+
+function toggleStrokeSetup(){
   if(stroke_menu_open == true){
     closeStrokeSetup();
   } else {
