@@ -41,16 +41,15 @@
   margin-left: 50px;
 }
 
-.sidenav .thickButtons {
+.sidenav .strokeSetup {
   background-color: #818181;
   border: 1px solid #818160;
   color: white;
   padding: 10px 10px 10px 10px; /* Some padding */
   cursor: pointer; /* Pointer/hand icon */
   float: left; /* Float the buttons side by side */
-  height: auto;
+  height: 20px;
   width: auto;
-  font-size: 20px;
 }
 
 .sidenav input {
@@ -81,4 +80,8 @@ label {
 
 button:hover{
   background-color: #4CAF00
+}
+
+span {
+  margin: 20px;
 }

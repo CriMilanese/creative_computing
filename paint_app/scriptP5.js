@@ -24,6 +24,7 @@ function setup() {
   );
   pickerColor = select('#markerColor');
   funkyCheckbox = select("#funkyBox");
+  funkyCheckbox.changed(goFunkyColor);
   imgTools.mousePressed(openNav);
   imgSave.mousePressed(saveFile);
   strokeMenu = select(".strokeSetup");
@@ -118,8 +119,8 @@ function calcEquiVertex(sz){
   by = cx * sin( 240 ) + ( cy * cos( 240 ) );
 }
 
-function goFunkyColor(click){
-  if(funkyBox.checked()){
+function goFunkyColor(){
+  if(this.checked()){
     funky = true;
   } else {
     funky = false;
