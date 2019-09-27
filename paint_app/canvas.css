@@ -37,6 +37,23 @@
   margin-left: 50px;
 }
 
+.sidenav .thickButtons {
+  background-color: #818181;
+  border: 1px solid #818160;
+  color: white;
+  padding: 10px 10px 10px 10px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  height: auto;
+  width: auto;
+  font-size: 20px;
+}
+
+.sidenav input {
+  font-size: 20px;
+  font-family: inherit;
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   /* .sidenav {padding-top: 15px;} */
@@ -56,15 +73,6 @@ h2 {
 
 label {
   color: #818181;
-}
-
-.thickButtons {
-  background-color: #818181;
-  border: 1px solid #818181;
-  color: white;
-  padding: 10px 10px 10px 10px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */
-  float: left; /* Float the buttons side by side */
 }
 
 button:hover{
