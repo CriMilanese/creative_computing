@@ -5,7 +5,7 @@ var stroke_menu_open = false;
 var pickerColor, whichShape, whatColor;
 var angle = 0;
 var button, imgTools, imgSave;
-var myScale, funky;
+var myScale, funky, funkyCheckbox;
 var ax, ay, bx, by, cx, cy;
 
 function setup() {
@@ -23,6 +23,7 @@ function setup() {
     windowHeight / 100
   );
   pickerColor = select('#markerColor');
+  funkyCheckbox = select("#funkyBox");
   imgTools.mousePressed(openNav);
   imgSave.mousePressed(saveFile);
   strokeMenu = select(".strokeSetup");
@@ -118,7 +119,7 @@ function calcEquiVertex(sz){
 }
 
 function goFunkyColor(click){
-  if(click.value()){
+  if(funkyBox.value()){
     funky = true;
   } else {
     funky = false;
