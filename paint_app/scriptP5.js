@@ -104,8 +104,8 @@ function largeMark(){
 }
 
 function calcEquiVertex(origX, origY, sz){
-  cx = pmouseX;
-  cy = pmouseY - floor(sz/10);
+  cx = 0;
+  cy = 0 - floor(sz/10);
   ax = cx * cos( 120 ) - ( cy * sin( 120 ) );
   ay = cx * sin( 120 ) + ( cy * cos( 120 ) );
   bx = cx * cos( 240 ) - ( cy * sin( 240 ) );
