@@ -19,7 +19,7 @@ function setup(){
   background(bg_colorFrom);
   winH = windowHeight;
   winW = windowWidth;
-  planetSize = winW / 10;
+  planetSize = winH/winW * 100;
   myRandomSeed = random(0, 10);
 }
 
@@ -63,6 +63,8 @@ function drawHills(){
   pop();
 }
 
+// I use a loop to generate all the necessary triangles
+// and the alpha property to change its tranparency based on mouseX position
 function drawRays(x_shift, rayColor, transparency){
   push();
   noStroke();
@@ -92,6 +94,7 @@ function drawAntiPlanet(shift, clr){
   pop();
 }
 
+//
 function drawStars(star_transp){
   push();
   randomSeed(myRandomSeed);
