@@ -25,8 +25,8 @@ function setup(){
 
 function draw(){
   //map transition ratios for each element
-  let posTransit = map(mouseX, 50, winW-50, winW/4, winW*0.65);
-  let antiPosTransit = map(mouseX, 0, winW, winW/2, winW*0.71);
+  let posTransit = map(mouseX, 50, winW-50, winW/4, winW*0.65, true);
+  let antiPosTransit = map(mouseX, 50, winW-50, winW/2, winW*0.69, true);
   let colTransit = map(mouseX, 0, winW, 0, 1);
   let planet_colTransit = map(mouseX, 0, winW/2, 0, 1, true);
   let rayTransp = map(mouseX, 0, winW/2, 255, 0, true);
