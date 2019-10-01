@@ -19,8 +19,8 @@ function setup(){
   background(bg_colorFrom);
   winH = windowHeight;
   winW = windowWidth;
-  planetSize = winH/winW * 100;
-  myRandomSeed = random(0, 10);
+  planetSize = winW / 10;
+  myRandomSeed = random(0, 10); //randomize the seed at each page refresh
 }
 
 function draw(){
@@ -94,7 +94,9 @@ function drawAntiPlanet(shift, clr){
   pop();
 }
 
-//
+// Customized shape using the frame "Begin/End-Shape"
+// randomSeed is used to generate the same pseudo-random numbers
+// everytime the page is refreshed
 function drawStars(star_transp){
   push();
   randomSeed(myRandomSeed);
