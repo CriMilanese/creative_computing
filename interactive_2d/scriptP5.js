@@ -7,13 +7,14 @@ let winH, winW;
 let planetSize;
 let myRandomSeed;
 
+
+
 function setup(){
   cnv = createCanvas(windowWidth, windowHeight);
-  cnv.attribute("z-index", "1");
-  cnv.addClass("myCanvas");
-  bg_colorFrom = color('#b4eaf0');
-  bg_colorTo = color('#161f6b');
-  planet_colorFrom = color('#fcfc42');
+  cnv.attribute("z-index", "1");  //supposed to set the depth of elements
+  bg_colorFrom = color('#b4eaf0');  // starting shade fro background
+  bg_colorTo = color('#161f6b');    // ending shade
+  planet_colorFrom = color('#fcfc42');  // starting shade for planet
   planet_colorTo = color('#ffffff');
   background(bg_colorFrom);
   winH = windowHeight;
@@ -23,17 +24,22 @@ function setup(){
 }
 
 function draw(){
-  let posTransit = map(mouseX, 50, winW-50, winW/4, winW*13/20);
-  let antiPosTransit = map(mouseX, 0, winW, winW/2, winW*7/10);
+  //map transition ratios for each element
+  let posTransit = map(mouseX, 50, winW-50, winW/4, winW*0.65);
+  let antiPosTransit = map(mouseX, 0, winW, winW/2, winW*0.71);
   let colTransit = map(mouseX, 0, winW, 0, 1);
   let planet_colTransit = map(mouseX, 0, winW/2, 0, 1, true);
+  let rayTransp = map(mouseX, 0, winW/2, 255, 0, true);
+  let starTransp = map(mouseX, winW/2, winW, 0, 255, true);
+
+  // set a color transition
   let bg_colorCurr = lerpColor(bg_colorFrom, bg_colorTo, colTransit)
   let planet_colorCurr = lerpColor(planet_colorFrom, planet_colorTo, planet_colTransit);
   // I must create the same value again with another name
   // in order to change its alpha value for transparency
   let rays_colorCurr = lerpColor(planet_colorFrom, planet_colorTo, planet_colTransit);
-  let rayTransp = map(mouseX, 0, winW/2, 255, 0, true);
-  let starTransp = map(mouseX, winW/2, winW, 0, 255, true);
+
+  //draw the various elements in teh right sequence in order to stack them
   background(bg_colorCurr);
   drawStars(starTransp);
   drawHills();
@@ -82,7 +88,7 @@ function drawAntiPlanet(shift, clr){
   push();
   noStroke();
   fill(clr);
-  circle(shift, winH/3, planetSize/1.5);
+  circle(shift, winH/3 - 20, planetSize/1.5);
   pop();
 }
 
