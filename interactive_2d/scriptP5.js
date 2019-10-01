@@ -88,7 +88,7 @@ function drawAntiPlanet(shift, clr){
   push();
   noStroke();
   fill(clr);
-  circle(shift, winH/3 - 20, planetSize/1.5);
+  circle(shift, winH/3, planetSize/1.5);
   pop();
 }
 
