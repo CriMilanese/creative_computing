@@ -12,8 +12,8 @@ function setup(){
     alpha[i] = new Character(4352 + i, // decimal unicode
                              random(0, windowWidth), // x
                              random(0, windowHeight), // y
-                             random(-5, 5), // vx
-                             random(-5, 5), // vy
+                             random(-5, 5), // variation of x
+                             random(-5, 5), // variation of y
                              15, // initial size
                              color(random(255), random(255), random(255)))
   }
