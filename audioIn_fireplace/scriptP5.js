@@ -1,4 +1,4 @@
-let permBox, infoBox;
+let permBox, infoBox, micContext;
 let mic;
 
 function setup(){
@@ -20,7 +20,7 @@ function draw(){
 
 function createAudioContext(){
   permBox.hide();
-
+  micContext = getAudioContext();
 }
 
 function infoBoxDisplay(){
