@@ -7,6 +7,7 @@ function setup(){
   permBox = select(".modal");
   mic = new p5.AudioIn();
   mic.start();
+  micContext = getAudioContext();
 }
 
 function draw(){
@@ -20,7 +21,7 @@ function draw(){
 
 function createAudioContext(){
   permBox.hide();
-  micContext = getAudioContext();
+  micContext.resume();
 }
 
 function infoBoxDisplay(){
