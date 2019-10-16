@@ -1,0 +1,28 @@
+body {
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  text-align: center;
+}
+
+.modal {
+  /* display: block; */
+  position: fixed;
+  margin: 5% 25% auto 25%;
+  width: 50%;
+  max-width: 1000px;
+  z-index = 1;
+  background-color: white;
+  border-radius: 10%;
+}
+
+.modal-content{
+  display: block;
+  margin: 5% auto;
+  width: 50%;
+}
+
+.infoBox {
+  display: none;
+  margin: 5% auto;
+}
