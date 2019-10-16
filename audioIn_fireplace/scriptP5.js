@@ -1,85 +1,61 @@
-let permBox, infoBox, micContext;
-let mic;
+//var mic;
 
-let numSegments = 30,
-  x = [],
-  y = [],
-  angle = [],
-  segLength = 5,
-  targetX,
-  targetY;
+var fires = [];
+var numberFire = 1000;
 
-for (let i = 0; i < numSegments; i++) {
-  x[i] = 0;
-  y[i] = 0;
-  angle[i] = 0;
-}
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  frameRate(30);
 
-function setup(){
-  cnv = createCanvas(windowWidth, windowHeight);
-  infoBox = select(".infoBox");
-  permBox = select(".modal");
-  // mic = new p5.AudioIn();
-  // mic.start();
-  // micContext = getAudioContext();
-  strokeWeight(20);
-  stroke(255, 100);
-
-  x[x.length - 1] = width / 2; // Set base x-coordinate
-  y[x.length - 1] = height; // Set base y-coordinate
-
-}
-
-function draw(){
-  background(0);
-  reachSegment(0, mouseX, mouseY);
-  for (let i = 1; i < numSegments; i++) {
-    reachSegment(i, targetX, targetY);
-  }
-  for (let j = x.length - 1; j >= 1; j--) {
-    positionSegment(j, j - 1);
-  }
-  for (let k = 0; k < x.length; k++) {
-    segment(x[k], y[k], angle[k], (k + 1) * 2);
+  for (i = 0; i < numberFire; i++) {
+    fires[i] = new Fire();
   }
 }
 
-function createAudioContext(){
-  permBox.hide();
-  // micContext.resume();
+function draw() {
+  background(70, 30, 10);
+    for (i = 0; i < fires.length; i++) {
+        fires[i].display();
+        fires[i].move();
+    }
+
 }
 
-function infoBoxDisplay(){
-  infoBox.show();
-}
+class Fire {
 
-function positionSegment(a, b) {
-  x[b] = x[a] + cos(angle[a]) * segLength;
-  y[b] = y[a] + sin(angle[a]) * segLength;
-}
+constructor () {
+  this.spread = 80;
+  this.x = random(windowWidth/2 - this.spread,
+                  windowWidth/2 + this.spread);
+  this.y = random(windowHeight, windowHeight - 100);
+  this.vx = random(-0.2, 0.2);
+  this.vy = random(-3, 0);
 
-function reachSegment(i, xin, yin) {
-  const dx = xin - x[i];
-  const dy = yin - y[i];
+  this.display = function() {
+    // print("distance: " + distance);
+    var distance = int(dist(this.x, this.y, windowWidth/2, windowHeight-100));
+    this.opacity = map(distance, 0, windowHeight, 255, 0);
+    // print("opacity: " + opacity);
+    var yellow = map(this.y/2, 0, windowHeight/8, 0, 40);
+    //var density = mic.getLevel();
+    //var h = map(density, 0, 1, 20, 50);
+    this.fireSize = map(distance, 0, windowHeight, 45, -5);
+    noStroke();
+    fill(250, yellow, 0, this.opacity-50);
+    triangle(this.x, this.y,
+      this.x + this.fireSize, this.y,
+      this.x + this.fireSize/2, this.y - this.fireSize);
 
-  // atan: given a point in 2D space is the angle formed
-  // by the vector interecting that point
-  angle[i] = atan2(dy, dx);
+    };
 
-  // cos() = given an angle is the x value of the vector
-  // intersecting the origin and a specified point normally
-  // given by the unit circle at that angle
-  targetX = xin - cos(angle[i]) * segLength;
-
-  // sin() = is the corresponding y value of that point
-  targetY = yin - sin(angle[i]) * segLength;
-}
-
-function segment(x, y, a, sw) {
-  strokeWeight(sw);
-  push();
-  translate(x, y);
-  rotate(a);
-  line(0, 0, segLength, 0);
-  pop();
+  this.move = function() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if(this.x>windowWidth*4/5 | this.x<windowWidth/5 | this.y<0){
+        this.x = random(windowWidth/2 - this.spread,
+                        windowWidth/2 + this.spread);
+        this.y = random(windowHeight, windowHeight - 100);
+      }
+    };
+  }
 }
