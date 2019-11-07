@@ -5,3 +5,9 @@ h1 {
   font-weight: 200;
   color: red;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
