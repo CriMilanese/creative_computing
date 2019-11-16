@@ -4,7 +4,7 @@ let cnv;
 var stepSize = 5.0;
 var font = 'Georgia';
 var letters = "Cristiano";
-var fontSizeMin = 3;
+var fontSizeMax = 150;
 var counter = 0;
 
 function setup() {
@@ -23,7 +23,7 @@ function setup() {
 function draw() {
   if (mouseIsPressed && mouseButton == LEFT && counter <= letters.length) {
     var d = dist(x, y, mouseX, mouseY);
-    textSize(fontSizeMin + d / 2);
+    textSize(fontSizeMax - d / 2);
     var newLetter = letters.charAt(counter);
     stepSize = textWidth(newLetter);
     if (d > stepSize) {
@@ -45,7 +45,7 @@ function mousePressed() {
   x = mouseX;
   y = mouseY;
 }
-r
+
 function setBack() {
   counter = 0;
 }
