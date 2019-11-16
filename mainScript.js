@@ -1,13 +1,13 @@
 PImage myself;
 
-void preload(){
+function preload(){
   myself = LoadImage('img/me.png');
 }
 
-void setup(){
+function setup(){
 
 }
 
-void draw(){
+function draw(){
 
 }
