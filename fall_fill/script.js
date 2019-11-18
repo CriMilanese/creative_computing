@@ -13,14 +13,16 @@ function setup() {
 }
 
 function draw() {
-  let speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
-  if (speed < 5) {
-    spill_paint();
-    paint_spatter(paint_blot);
-  } else {
-    draw_line(speed);
-    paint_spatter(spatter_size);
-    paint_blot = 0;
+  if (mousePressed) {
+    let speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
+    if (speed < 5) {
+      spill_paint();
+      paint_spatter(paint_blot);
+    } else {
+      draw_line(speed);
+      paint_spatter(spatter_size);
+      paint_blot = 0;
+    }
   }
 }
 
@@ -48,13 +50,8 @@ function draw_line(mouseSpeed) {
   line(pmouseX, pmouseY, mouseX, mouseY);
 }
 
-function mousePressed(){
-  background(bgcolor);
-  paint_blot = 0;
-}
-
-function keyTyped(){
-  switch(key){
+function keyTyped() {
+  switch (key) {
     case 's':
       save(cnv, "Spilledpaint__" + frameCount + ".jpg");
       break;
@@ -63,8 +60,8 @@ function keyTyped(){
   }
 }
 
-function keyPressed(){
-  switch(keyCode){
+function keyPressed() {
+  switch (keyCode) {
     case DELETE:
       background(bgcolor);
   }
