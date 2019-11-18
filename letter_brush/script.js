@@ -5,12 +5,15 @@ var stepSize = 5.0;
 var font = 'Georgia';
 var letters = "Cristiano";
 var fontSizeMax = 150;
+var textInput;
 var counter = 0;
 
 function setup() {
   // use full screen size
   cnv = createCanvas(displayWidth, displayHeight);
   cnv.mouseReleased(setBack);
+  textInput = createInput('');
+  textInput.position(30, 30);
   background(255);
   cursor(CROSS);
   x = mouseX;
@@ -48,4 +51,15 @@ function mousePressed() {
 
 function setBack() {
   counter = 0;
+}
+
+function keyPressed(){
+  switch(keyCode){
+    case BACKSPACE:
+      background(255);
+      break;
+    case RETURN:
+      letters = textInput.value();
+      break;
+  }
 }
