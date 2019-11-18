@@ -13,7 +13,7 @@ function setup() {
 }
 
 function draw() {
-  if (mousePressed) {
+  if (mouseIsPressed) {
     let speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
     if (speed < 5) {
       spill_paint();
