@@ -20,7 +20,7 @@ function draw() {
       paint_spatter(paint_blot);
     } else {
       draw_line(speed);
-      paint_spatter(spatter_size);
+      paint_spatter(paint_blot);
       paint_blot = 0;
     }
   }
