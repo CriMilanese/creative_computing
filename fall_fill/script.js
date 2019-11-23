@@ -62,7 +62,7 @@ function keyTyped() {
 
 function keyPressed() {
   switch (keyCode) {
-    case DELETE:
+    case 'DELETE':
       background(bgcolor);
   }
 }
