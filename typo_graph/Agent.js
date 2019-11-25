@@ -4,7 +4,7 @@ function Agent(x, y){
   this.vel = p5.Vector.random2D();
   this.acc = createVector();
   this.angle = 8;
-  this.radius = 10;
+  this.radius = 75;
   this.maxSpeed = 5;
   this.maxForce = 1;
   this.c = color(random(255), random(255), random(255));
@@ -19,6 +19,9 @@ Agent.prototype.update = function() {
   this.angle  += PI/60;
   if(this.angle > 2*PI){
     angle=0;
+  }
+  if(this.radius > 10){
+    this.radius--;
   }
 }
 
