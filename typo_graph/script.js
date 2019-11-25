@@ -35,9 +35,7 @@ function init(){
     console.log(i+' LocX'+': '+textLocX+' '+' LocY'+': '+textLocY);
     points = points.concat(font.textToPoints(txt[i], textLocX, textLocY, 256));
   }
-
   for (let i = 0; i < points.length; i++) {
-    fill(255);
     let agent = new Agent(points[i].x, points[i].y);
     agents.push(agent);
   }
