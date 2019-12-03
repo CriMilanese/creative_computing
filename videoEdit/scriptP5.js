@@ -11,7 +11,6 @@ let angle, speed;
 function setup() {
   camHeight = int((3 * camWidth) / 4);
   cnv = createCanvas(camWidth, camHeight);
-  // background(255);
   video = createCapture(VIDEO);
   video.size(camWidth / vScale, camHeight / vScale);
   video.hide();
@@ -23,7 +22,6 @@ function setup() {
 function draw() {
   background(0);
   video.loadPixels();
-  cnv.loadPixels();
   for (y = 0; y < video.height; y++) {
     for (x = 0; x < video.width; x++) {
       index = (x + y * video.width) * 4;
