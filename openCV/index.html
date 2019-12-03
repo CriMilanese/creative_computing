@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+<script async language="javascript" type="text/javascript" src="opencv.js" onload="openCVready()"></script>
+<script language="javascript" type="text/javascript" src="script.js"></script>
+<script language="javascript" type="text/javascript" src="videoCapture.js"></script>
+<title>Hello OpenCV.js</title>
+</head>
+<body>
+<h2>Hello OpenCV.js</h2>
+<p id="status"> <b>openCV</b> is loading....</p>
+<div>
+  <button type="button" name="record" id="PlayStop" onclick="stream()">Start</button>
+  <div class="videoInput">
+    <video id="videoInput" onload="videoInit()" width="300" height="300"></video>
+  </div>
+  <div class="input">
+    <canvas id="canvasFrame" width="300" height="300"></canvas>
+  </div>
+  <div class="output">
+    <canvas id="canvasOutput" width="300" height="300"></canvas>
+  </div>
+</div>
+</body>
+</html>
