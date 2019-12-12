@@ -19,6 +19,8 @@ function setup() {
   pixelDensity(1);
 }
 
+// get the pixels from the video and draw on canvas based
+// on their color and brightness
 function draw() {
   background(0);
   video.loadPixels();
@@ -44,6 +46,7 @@ function draw() {
   angle += PI/speed;
 }
 
+//generate an X shape from the center of the grid tile
 function createX(){
   line(0, 0, -vScale/2, -vScale/2);
   line(0, 0, vScale/2, -vScale/2);
