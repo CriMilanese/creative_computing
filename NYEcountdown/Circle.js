@@ -10,7 +10,7 @@ function Circle(x, y) {
   this.lifespan = 255;
 
   this.buildFireworks = function() {
-    for (var i = 0; i < 30; i++) {
+    for (var i = 0; i < 20; i++) {
       let rangeX = random(this.x - this.r, this.x + this.r);
       let rangeY = random(this.y - this.r, this.y + this.r);
       this.fireworks.push(new Firework(rangeX, rangeY));
@@ -18,7 +18,7 @@ function Circle(x, y) {
   }
 
   this.grow = function() {
-    this.r += 0.1;
+    this.r += 0.2;
   }
 
   this.stop = function(arr) {

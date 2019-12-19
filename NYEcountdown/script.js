@@ -1,5 +1,3 @@
-let participants = 2;
-let mySlide;
 let img;
 let imgHeight;
 let circles = [];
@@ -7,6 +5,9 @@ let validSpots = [];
 let indexSpot;
 let stopAdding = false;
 let interv;
+let mic, micLevel, micPermit;
+let minMicLevel = 0.08;
+let btn;
 
 function preload() {
   img = loadImage('NewYear2020Eve.png');
@@ -17,25 +18,31 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   img.resize(windowWidth, 0);
   img.loadPixels();
-  setInterval(fireShow, 5000);
   let px = pixelDensity();
   pixelDensity(1);
   selectSpots();
   smooth();
   pixelDensity(px);
-  translate((windowWidth / 2 - img.width / 2)*px, (windowHeight / 2 - img.height / 2))*px;
+  introSceneSetup();
 }
 
 function draw() {
   background(0);
-  // image(img, 0, 0);
-  if (!stopAdding) {
-    for (let i = 0; i < 10; i++) {
-      indexSpot = floor(random(0, validSpots.length));
-      addIfNotOverlapping(validSpots[indexSpot].x, validSpots[indexSpot].y);
+  if (micPermit) {
+    if (!stopAdding && micLevel>minMicLevel) {
+      for (let i = 0; i < 10; i++) {
+        indexSpot = floor(random(0, validSpots.length));
+        addIfNotOverlapping(validSpots[indexSpot].x, validSpots[indexSpot].y);
+      }
     }
+    circleShow();
+    micLevel = mic.getLevel();
+    if (frameCount % 60 == 0) {
+      console.log(micLevel);
+    }
+  } else {
+
   }
-  circleShow();
 }
 
 function selectSpots() {
@@ -73,9 +80,9 @@ function addIfNotOverlapping(dx, dy) {
 
 function circleShow() {
   for (let j = 0; j < circles.length; j++) {
-    if (!circles[j].tooBig) {
-      circles[j].stop(circles);
+    if (!circles[j].tooBig && micLevel>minMicLevel) {
       circles[j].grow();
+      circles[j].stop(circles);
     }
     circles[j].show();
   }
@@ -86,13 +93,11 @@ function explode() {
   if (circles.length == 0) {
     noLoop();
     clearInterval(interv);
-    console.log("HAPPY NEW YEAR!");
   } else {
     while (j < 10) {
       let tmpIndex = floor(random(circles.length));
       if (circles[tmpIndex].done) {
         circles.splice(tmpIndex, 1);
-        console.log("this firework is done");
       } else {
         circles[tmpIndex].fire = true;
       }
@@ -106,5 +111,21 @@ function fireShow() {
     stopAdding = true;
     interv = setInterval(explode, 300);
   }
-  console.log(getFrameRate());
+}
+
+function introSceneSetup() {
+  micPermit = false;
+  btn = createButton('start countdown');
+  let sz = btn.size();
+  btn.position(windowWidth / 2 - sz.width / 2, windowHeight / 2);
+  btn.mousePressed(letsBegin);
+}
+
+function letsBegin() {
+  micPermit = true;
+  btn.hide();
+  mic = new p5.AudioIn();
+  mic.start();
+  getAudioContext().resume();
+  setInterval(fireShow, 6000);
 }
