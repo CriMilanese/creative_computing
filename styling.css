@@ -1,13 +1,20 @@
-h1 {
-  text-align: center;
-  font-size: 30;
-  font-style: normal;
-  font-weight: 200;
-  color: red;
+.details {
+  float: right;
+  font-size: 25px;
+  margin: 200px 200px 0px 0px;
+  text-align: right;
+  z-index: 15;
+}
+
+.p5Canvas {
+  z-index: 10;
+  display:block;
 }
 
 body {
-  margin: 0;
+  margin: 50px 200px;
   padding: 0;
   overflow: hidden;
+  background-color: #bc7711;
+  z-index: 5;
 }
