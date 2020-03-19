@@ -22,10 +22,10 @@ body {
 .details {
   display: inline;
   float: right;
-  font-size: 2vw;
+  font-size: 1.5vw;
   font-weight: bold;
   position: relative;
-  margin: 10% 15% auto auto;
+  margin: 7% 15% auto auto;
   text-align: right;
   z-index: 10;
 }
@@ -41,7 +41,7 @@ body {
 }
 
 #name {
-  font-size: 5vw;
+  font-size: 4.5vw;
   color: #000000;
   animation: opac 3s linear 2s;
   animation-direction: normal;

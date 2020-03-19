@@ -52,8 +52,8 @@ function draw() {
 }
 
 function findImageSpots() {
-  scale_t = windowWidth/windowHeight;
-  offset = [windowWidth * 0.1, windowHeight*0.1];
+  scale_t = windowWidth/800;
+  offset = [windowWidth * 0.1, windowHeight*0.07];
   agent_radius = 7;
   myself.loadPixels();
   // the image is B&W so r, g, and b values are the same
