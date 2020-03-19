@@ -1,12 +1,12 @@
 body {
+  background-color: '#e69665'
   display: block;
   margin: 0;
   overflow: hidden;
 }
 
 .myGrid {
-  background-color: '#e69665'
-  display: inline-block;
+  /* display: inline-block; */
   width: 100%;
 }
 
