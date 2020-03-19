@@ -32,7 +32,11 @@ function Agent(tx, ty, radius, scale_t){
   }
 
   this.responsive = function(wW, wH){
-    ratio = wW/wH;
+      if(wW>wH){
+        ratio = wW/wH;
+      } else {
+        ratio = wH/wW;
+      }
     this.pos = this.target.copy().mult(ratio);
   }
 }

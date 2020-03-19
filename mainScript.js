@@ -40,7 +40,7 @@ function draw() {
       sendAgents();
       break;
     case 1:
-      saveImage();
+      // saveImage();
       break;
     case 2:
       check_mouse();
