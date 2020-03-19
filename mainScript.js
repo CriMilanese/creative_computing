@@ -19,7 +19,7 @@ function setup() {
   phase = 0;
   speed = 0;
   allDone = false;
-  bodyBgColor = color('#ffffff');
+  bodyBgColor = color('#e69665');
 }
 
 function draw() {
