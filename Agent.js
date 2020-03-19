@@ -11,8 +11,8 @@ function Agent(tx, ty, radius, scale_t){
 
   this.update = function(){
     this.vel = p5.Vector.sub(this.target, this.pos);
-    if(this.vel.mag() > 55){
-      this.vel.normalize().mult(55);
+    if(this.vel.mag() > 35){
+      this.vel.normalize().mult(35);
     } else {
       this.done = true;
     }
@@ -26,7 +26,7 @@ function Agent(tx, ty, radius, scale_t){
   }
 
   this.show = function(){
-    fill(201,25,0);
+    fill(102, 34, 27);
     noStroke();
     ellipse(this.pos.x, this.pos.y, this.r);
   }
