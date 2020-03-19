@@ -6,12 +6,12 @@ body {
 }
 
 .myGrid {
-  /* display: inline-block; */
+  display: inline-block;
   width: 100%;
 }
 
 #cnvs {
-  position:absolute;
+  position:static;
   z-index: 10;
   float: left;
 }
