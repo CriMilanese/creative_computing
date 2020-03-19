@@ -11,7 +11,7 @@ body {
 }
 
 #cnvs {
-  display: block;
+  display: inline;
   position:static;
   float: left;
 }
