@@ -5,6 +5,7 @@ body {
 }
 
 .myGrid {
+  background-color: '#e69665'
   display: inline-block;
   width: 100%;
 }
