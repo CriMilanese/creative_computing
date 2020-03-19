@@ -4,6 +4,7 @@ let cnv, bright;
 let rockets = [];
 let speed, allDone;
 let bodyBgColor;
+const blotStep = 6;
 
 function preload() {
   myself = loadImage('images/me.png');
@@ -11,16 +12,18 @@ function preload() {
 
 function setup() {
   myself.resize(300, 0);
-  cnv = createCanvas(myself.width, myself.height);
+  cnv = createCanvas(windowWidth, windowHeight);
+  cnv.parent('cnvs');
   pixelDensity(1);
   findImageSpots();
   phase = 0;
   speed = 0;
   allDone = false;
-  bodyBgColor = color('#bc7711');
+  bodyBgColor = color('#ffffff');
 }
 
 function draw() {
+  updateSize();
   background(bodyBgColor);
   switch (phase) {
     case 0:
@@ -39,8 +42,8 @@ function findImageSpots() {
   myself.loadPixels();
   // the image is B&W so r, g, and b values are the same
   // for (let x = 0; x < myself.pixels.length; x += 4) {
-  for (var y = 0; y < myself.height; y+=6) {
-      for (var x = 0; x < myself.width; x+=6) {
+  for (var y = 0; y < myself.height; y+=blotStep) {
+      for (var x = 0; x < myself.width; x+=blotStep) {
         let index = (x + y * myself.width) * 4;
           if(index % 4 == 0){
             if (myself.pixels[index] < 51 && myself.pixels[index+3] > 0) {
@@ -81,3 +84,7 @@ function saveImage() {
 }
 
 function mousePressed() {}
+
+function updateSize(){
+  cnv.resize(windowWidth, windowHeight);
+}

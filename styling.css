@@ -1,20 +1,25 @@
+body {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+}
+
+.myGrid {
+  display: inline-block;
+  width: 100%;
+}
+
+#cnvs {
+  position:absolute;
+  z-index: 10;
+  float: left;
+}
+
 .details {
+  position: absolute;
   float: right;
+  width: 30%;
   font-size: 25px;
-  margin: 200px 200px 0px 0px;
   text-align: right;
   z-index: 15;
-}
-
-.p5Canvas {
-  z-index: 10;
-  display:block;
-}
-
-body {
-  margin: 50px 200px;
-  padding: 0;
-  overflow: hidden;
-  background-color: #bc7711;
-  z-index: 5;
 }
