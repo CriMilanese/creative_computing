@@ -34,8 +34,11 @@ function Agent(tx, ty, radius, scale_t){
   this.responsive = function(wW, wH){
     if(this.done){
       let ratio = wW/800;
+      if(ratio<1.8){
+        this.pos = this.target.copy().mult(ratio).add(-ratio);
+
+      }
       // let tmp = map(ratio, 0, 2, 0, 6)
-      this.pos = this.target.copy().mult(ratio).add(-ratio);
     }
   }
 }
