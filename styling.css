@@ -16,6 +16,7 @@ body {
   position: absolute;
   float: left;
   z-index: 5;
+  height: 90vh;
 }
 
 .details {
