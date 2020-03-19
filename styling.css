@@ -6,19 +6,111 @@ body {
 }
 
 .myGrid {
-  display: inline-block;
+  display: block;
   width: 100%;
 }
 
 #cnvs {
   display: inline;
-  position:absolute;
+  position: absolute;
   float: left;
+  z-index: 5;
 }
 
 .details {
   display: inline;
-  position: absolute;
-  font-size: 25px;
+  float: right;
+  font-size: 45px;
+  position: relative;
+  margin: 5% 10% auto auto;
   text-align: right;
+  z-index: 10;
+}
+
+@keyframes name_color {
+  from {color: #e69665;}
+  to {color: black;}
+}
+
+#name {
+  font-size: 65px;
+  color: #e69665;
+  animation: name_color 3s linear 3s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+#title {
+  color: #e69665;
+  animation: name_color 3s linear 3s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+#social {
+  color: #e69665;
+  animation: name_color 3s linear 4s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+#city {
+  color: #e69665;
+  animation: name_color 3s linear 5s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+#interests {
+  color: #e69665;
+  animation: name_color 3s linear 6s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
 }
