@@ -1,5 +1,5 @@
 body {
-  background-color: #ffffff;
+  background-color: #e69665;
   display: block;
   margin: 0;
   overflow: hidden;
@@ -8,6 +8,7 @@ body {
 .myGrid {
   display: block;
   width: 100%;
+  height: 100%;
 }
 
 #cnvs {
@@ -15,8 +16,6 @@ body {
   position: absolute;
   float: left;
   z-index: 5;
-  width: 100%;
-  height: 100%;
 }
 
 .details {
@@ -25,7 +24,7 @@ body {
   font-size: 2vw;
   font-weight: bold;
   position: relative;
-  margin: 5% 10% auto auto;
+  margin: 10% 15% auto auto;
   text-align: right;
   z-index: 10;
 }
@@ -57,7 +56,8 @@ body {
   animation-iteration-count: 1;
 }
 
-#social {
+
+#city {
   color: #000000;
   animation: opac 3s linear 4s;
   animation-direction: normal;
@@ -65,7 +65,7 @@ body {
   animation-iteration-count: 1;
 }
 
-#city {
+#status {
   color: #000000;
   animation: opac 3s linear 5s;
   animation-direction: normal;
@@ -73,6 +73,13 @@ body {
   animation-iteration-count: 1;
 }
 
+#social {
+  color: #000000;
+  animation: opac 3s linear 6s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
 #interests {
   color: #000000;
 }

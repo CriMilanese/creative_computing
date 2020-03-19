@@ -35,8 +35,9 @@ function draw() {
   background(bodyBgColor);
   switch (phase) {
     case 0:
-      // draw_background();
-      // sendAgents();
+      resizeCanvas(windowWidth, windowHeight);
+      draw_background();
+      sendAgents();
       break;
     case 1:
       saveImage();
@@ -46,8 +47,6 @@ function draw() {
 
       break;
     default:
-      draw_background();
-      sendAgents();
       break;
   }
 
@@ -55,7 +54,7 @@ function draw() {
 
 function findImageSpots() {
   scale_t = windowWidth/windowHeight;
-  offset = [windowWidth * 0.1, windowHeight*0.1];
+  offset = [windowWidth * 0.15, windowHeight*0.1];
   agent_radius = 7;
   myself.loadPixels();
   // the image is B&W so r, g, and b values are the same
@@ -89,11 +88,11 @@ function sendAgents() {
     }
     rockets[i].show();
     rockets[i].move();
+    rockets[i].responsive(windowWidth, windowHeight)
   }
   if(counter == rockets.length){
     allDone = true;
     print(rockets.length)
-    noLoop();
   } else {
     counter = 0;
   }
@@ -109,6 +108,7 @@ function saveImage() {
 
 function mousePressed() {
     phase += 1;
+    loop();
 }
 
 function updateSize(){
@@ -116,7 +116,6 @@ function updateSize(){
 }
 
 function check_mouse(){
-  noLoop();
 }
 
 function draw_background(){

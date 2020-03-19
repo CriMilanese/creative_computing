@@ -11,8 +11,8 @@ function Agent(tx, ty, radius, scale_t){
 
   this.update = function(){
     this.vel = p5.Vector.sub(this.target, this.pos);
-    if(this.vel.mag() > 35){
-      this.vel.normalize().mult(35);
+    if(this.vel.mag() > 55){
+      this.vel.normalize().mult(55);
     } else {
       this.done = true;
     }
@@ -29,5 +29,10 @@ function Agent(tx, ty, radius, scale_t){
     fill(102, 34, 27);
     noStroke();
     ellipse(this.pos.x, this.pos.y, this.r);
+  }
+
+  this.responsive = function(wW, wH){
+    ratio = wW/wH;
+    this.pos = this.target.copy().mult(ratio);
   }
 }
