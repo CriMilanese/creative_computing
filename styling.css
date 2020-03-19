@@ -11,14 +11,14 @@ body {
 }
 
 #cnvs {
+  display: block;
   position:static;
-  z-index: 10;
   float: left;
 }
 
 .details {
-  position:static;
+  display: inline;
+  position: static;
   font-size: 25px;
   text-align: right;
-  z-index: 15;
 }
