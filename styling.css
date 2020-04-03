@@ -2,7 +2,7 @@ body {
   background-color: #e69665;
   display: block;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .myGrid {
@@ -16,16 +16,17 @@ body {
   position: absolute;
   float: left;
   z-index: 5;
-  height: 90vh;
+  /* height: 90vh; */
 }
 
 .details {
   display: inline;
   float: right;
-  font-size: 1.5vw;
+  font-size: 1.4vw;
   font-weight: bold;
   position: relative;
-  margin: 7% 15% auto auto;
+  height: 80%;
+  margin: 8% 20% 15% 50%;
   text-align: right;
   z-index: 10;
 }
@@ -41,7 +42,7 @@ body {
 }
 
 #name {
-  font-size: 4.5vw;
+  font-size: 300%;
   color: #000000;
   animation: opac 3s linear 2s;
   animation-direction: normal;
@@ -81,6 +82,7 @@ body {
   animation-fill-mode: both;
   animation-iteration-count: 1;
 }
+
 #interests {
   color: #000000;
 }

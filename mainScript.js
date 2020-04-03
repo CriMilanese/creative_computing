@@ -2,7 +2,7 @@ let myself;
 let phase;
 let cnv, bright;
 let rockets = [];
-let speed, allDone;
+let how_many, allDone, scale_t, offset, counter;
 let bodyBgColor;
 const blotStep = 6;
 
@@ -18,13 +18,18 @@ function preload() {
 }
 
 function setup() {
-  myself.resize(300, 0);
+  myself.resize(windowWidth/5, 0);
   cnv = createCanvas(windowWidth, windowHeight);
   cnv.parent('cnvs');
+  // cnv.attribute('display', 'inline');
+  // cnv.attribute('position', 'left');
+  // cnv.attribute('float', 'left');
+  // cnv.attribute('z-index', '5');
   pixelDensity(1);
   findImageSpots();
+  counter = 0;
   phase = 0;
-  speed = 0;
+  how_many = 0;
   allDone = false;
   bodyBgColor = color('#e69665');
   select_elements();
@@ -32,17 +37,17 @@ function setup() {
 
 function draw() {
   updateSize();
-  background(bodyBgColor);
   switch (phase) {
     case 0:
+      background(bodyBgColor);
       draw_background();
       sendAgents();
       break;
     case 1:
-      // saveImage();
+      // noLoop()
       break;
     case 2:
-      check_mouse();
+
 
       break;
     default:
@@ -50,26 +55,36 @@ function draw() {
   }
 
 }
+function perfect_ratio(){
+  let res = [];
+  if(windowWidth<windowHeight){
+    res[0] = windowWidth/800;
+  } else if(windowHeight<windowWidth){
+    res[0] = windowWidth/windowHeight;
+  }
+  res[1] = offset.copy();
+  res[0] = map(res[0], 0.5, res[0], 0.5, 1.8, true);
+  return res;
+}
 
 function findImageSpots() {
-  scale_t = windowWidth/800;
-  offset = [windowWidth * 0.1, windowHeight*0.07];
+  offset = createVector(windowWidth*0.2, windowHeight*0.03);
+  scale_t = perfect_ratio();
   agent_radius = 7;
   myself.loadPixels();
   // the image is B&W so r, g, and b values are the same
-  // for (let x = 0; x < myself.pixels.length; x += 4) {
   for (var y = 0; y < myself.height; y+=blotStep) {
       for (var x = 0; x < myself.width; x+=blotStep) {
         let index = (x + y * myself.width) * 4;
           if(index % 4 == 0){
             if (myself.pixels[index] < 51 && myself.pixels[index+3] > 0) {
-              rockets.push(new Agent(x*scale_t+offset[0], y*scale_t+offset[1], agent_radius-1, scale_t));
+              rockets.push(new Agent(x*scale_t[0]+scale_t[1].x, y*scale_t[0]+scale_t[1].y, agent_radius-1, scale_t[0]));
             } else if (myself.pixels[index] >= 51 && myself.pixels[index] < 102) {
-              rockets.push(new Agent(x*scale_t+offset[0], y*scale_t+offset[1], agent_radius-2, scale_t));
+              rockets.push(new Agent(x*scale_t[0]+scale_t[1].x, y*scale_t[0]+scale_t[1].y, agent_radius-2, scale_t[0]));
             } else if (myself.pixels[index] >= 102 && myself.pixels[index] < 153) {
-              rockets.push(new Agent(x*scale_t+offset[0], y*scale_t+offset[1], agent_radius-4, scale_t));
+              rockets.push(new Agent(x*scale_t[0]+scale_t[1].x, y*scale_t[0]+scale_t[1].y, agent_radius-4, scale_t[0]));
             } else if (myself.pixels[index] >= 153 && myself.pixels[index] < 205) {
-              rockets.push(new Agent(x*scale_t+offset[0], y*scale_t+offset[1], agent_radius-5, scale_t));
+              rockets.push(new Agent(x*scale_t[0]+scale_t[1].x, y*scale_t[0]+scale_t[1].y, agent_radius-5, scale_t[0]));
             }
       }
     }
@@ -77,48 +92,34 @@ function findImageSpots() {
 }
 
 function sendAgents() {
-  let counter = 0;
-  if(speed < rockets.length){
-    speed += 13;
-  }
-  for (let i = 0; i < speed -1; i++) {
-    if(rockets[i].done == true){
+  how_many += 13;
+  for (let i = 0; i < how_many -1 && i < rockets.length; i++) {
+    if(rockets[i].done){
       counter++;
     }
     rockets[i].show();
-    rockets[i].move();
-    rockets[i].responsive(windowWidth, windowHeight);
+    rockets[i].move(35);
   }
   if(counter == rockets.length){
     allDone = true;
-    // phase+=1;
+    noLoop();
   } else {
     counter = 0;
   }
 }
 
-function saveImage() {
-  save('images/background.png');
-  phase += 1;
-  let bg = select('body');
-  bg.attribute('style', 'url(images/background.png); background-size: 100% 100%');
-  cnv.hide();
-}
-
 function mousePressed() {
-    // phase += 1;
+  phase = 1;
+  loop();
 }
 
 function updateSize(){
   cnv.resize(windowWidth, windowHeight);
 }
 
-function check_mouse(){
-}
-
 function draw_background(){
   push();
-  randomSeed(12);
+  randomSeed(9);
   noStroke();
   // translate(windowWidth/2, windowWidth/2);
   for(j=0;j<20;j++){

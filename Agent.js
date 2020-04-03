@@ -9,18 +9,18 @@ function Agent(tx, ty, radius, scale_t){
   this.done = false;
   this.r = radius*scale_t;
 
-  this.update = function(){
+  this.update = function(speed){
     this.vel = p5.Vector.sub(this.target, this.pos);
-    if(this.vel.mag() > 55){
-      this.vel.normalize().mult(55);
+    if(this.vel.mag() > speed){
+      this.vel.normalize().mult(speed);
     } else {
       this.done = true;
     }
   }
 
-  this.move = function(){
+  this.move = function(spd){
     if(!this.done){
-      this.update();
+      this.update(spd);
       this.pos.add(this.vel);
     }
   }
@@ -29,16 +29,5 @@ function Agent(tx, ty, radius, scale_t){
     fill(102, 34, 27);
     noStroke();
     ellipse(this.pos.x, this.pos.y, this.r);
-  }
-
-  this.responsive = function(wW, wH){
-    if(this.done){
-      let ratio = wW/800;
-      if(ratio<1.8){
-        this.pos = this.target.copy().mult(ratio).add(-ratio);
-
-      }
-      // let tmp = map(ratio, 0, 2, 0, 6)
-    }
   }
 }
