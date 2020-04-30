@@ -20,11 +20,7 @@ function preload() {
 function setup() {
   myself.resize(windowWidth/5, 0);
   cnv = createCanvas(windowWidth, windowHeight);
-  cnv.parent('cnvs');
-  // cnv.attribute('display', 'inline');
-  // cnv.attribute('position', 'left');
-  // cnv.attribute('float', 'left');
-  // cnv.attribute('z-index', '5');
+  cnv.parent('face');
   pixelDensity(1);
   findImageSpots();
   counter = 0;

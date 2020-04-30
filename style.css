@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap');
+
+html body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  font-size: 2vw;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  z-index:15;
+  background: #353535;
+  color: #000;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.details {
+  font-family: 'Source Serif Pro', serif;
+  text-align: right;
+ }
+
+/* .card:hover {
+
+ } */
+
+@keyframes opac {
+  from {opacity: 0%;}
+  to {color: 100%;}
+}
+
+@keyframes slide_in_left {
+  from {margin-left: 500px;}
+  to {margin-left: 0px;}
+}
+
+#name {
+  font-size: 300%;
+  color: #000000;
+  animation: opac 3s linear 2s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+#title {
+  color: #000000;
+  animation: opac 3s linear 3s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+
+#city {
+  color: #000000;
+  animation: opac 3s linear 4s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+#status {
+  color: #000000;
+  animation: opac 3s linear 5s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+#social {
+  color: #000000;
+}
+
+#interests {
+  color: #000000;
+}
+
+#face{
+  display: inline;
+  position: absolute;
+  float: left;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  background-color:
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: 2fr 2fr;
+  height: 100vh;
+}
+
+.fa {
+  padding: 2%;
+  font-size: 3%;
+  width: 7%;
+  text-align: center;
+  text-decoration: none;
+  margin: 0.5% 0.2%;
+
+}
+
+.fa:hover {
+    opacity: 0.7;
+    box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+    transform: translateY(-3px) scale(1.1);
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+  animation: slide_in_left 3s linear 6s;
+  animation: opac 3s linear 6s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+  animation: slide_in_left 3s linear 7s;
+  animation: opac 3s linear 7s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+  animation: slide_in_left 3s linear 8s;
+  animation: opac 3s linear 8s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+  animation: slide_in_left 3s linear 9s;
+  animation: opac 3s linear 9s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+.fa-github {
+  background: #ffffff;
+  color: 'black';
+  animation: slide_in_left 3s linear 10s;
+  animation: opac 3s linear 10s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+  animation: slide_in_left 3s linear 11s;
+  animation: opac 3s linear 11s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+  animation: slide_in_left 3s linear 12s;
+  animation: opac 3s linear 12s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
