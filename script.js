@@ -4,6 +4,8 @@ let cnv, bright;
 let rockets = [];
 let how_many, allDone, scale_t, offset, counter;
 const blotStep = 6;
+let grid;
+let gridWidth, gridHeight;
 
 // DOM components
 let home_frame;
@@ -17,8 +19,11 @@ function preload() {
 }
 
 function setup() {
-  myself.resize(windowWidth/5.5, 0);
-  cnv = createCanvas(windowWidth, windowHeight);
+  grid = document.querySelector(".grid");
+  gridWidth = grid.offsetWidth;
+  gridHeight = grid.offsetHeight;
+  myself.resize(gridWidth/3, 0);
+  cnv = createCanvas(gridWidth, gridHeight);
   cnv.parent('face');
   pixelDensity(1);
   findImageSpots();
@@ -49,10 +54,10 @@ function draw() {
 }
 function perfect_ratio(){
   let res = [];
-  if(windowWidth<windowHeight){
-    res[0] = windowWidth/800;
-  } else if(windowHeight<windowWidth){
-    res[0] = windowWidth/windowHeight;
+  if(gridWidth<gridHeight){
+    res[0] = gridWidth/800;
+  } else if(gridHeight<gridWidth){
+    res[0] = gridWidth/gridHeight;
   }
   res[1] = offset.copy();
   res[0] = map(res[0], 0.5, res[0], 0.5, 1.8, true);
@@ -60,7 +65,7 @@ function perfect_ratio(){
 }
 
 function findImageSpots() {
-  offset = createVector(windowWidth*0.03, windowHeight*0.05);
+  offset = createVector(gridWidth*0.05, gridHeight*0.05);
   scale_t = perfect_ratio();
   agent_radius = 7;
   myself.loadPixels();
@@ -106,17 +111,17 @@ function mousePressed() {
 }
 
 function updateSize(){
-  cnv.resize(windowWidth, windowHeight);
+  cnv.resize(gridWidth, gridHeight);
 }
 
 function draw_background(){
   push();
   randomSeed(9);
   noStroke();
-  // translate(windowWidth/2, windowWidth/2);
+  // translate(gridWidth/2, gridWidth/2);
   for(j=0;j<20;j++){
     fill(color('rgba(207, 191, 105, 0.35)'));
-    ellipse(random(windowWidth), random(windowHeight), random(windowWidth/3));
+    ellipse(random(gridWidth), random(gridHeight), random(gridWidth/3));
   }
   pop();
 }
