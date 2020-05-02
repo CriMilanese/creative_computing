@@ -2,10 +2,12 @@ let myself;
 let phase;
 let cnv, bright;
 let rockets = [];
-let how_many, allDone, scale_t, offset, counter;
+let allDone, counter;
 const blotStep = 6;
 let grid;
 let gridWidth, gridHeight;
+let cell, cellHeight, cellWidth;
+let spawns_per_loop = 0;
 
 // DOM components
 let home_frame;
@@ -22,16 +24,17 @@ function setup() {
   grid = document.querySelector(".grid");
   gridWidth = grid.offsetWidth;
   gridHeight = grid.offsetHeight;
-  myself.resize(gridWidth/3, 0);
+  cell = document.querySelector("#face");
+  cellWidth = cell.offsetWidth;
+  cellHeight = cell.offsetHeight;
+  myself.resize(cellWidth, 0);
   cnv = createCanvas(gridWidth, gridHeight);
   cnv.parent('face');
   pixelDensity(1);
   findImageSpots();
   counter = 0;
   phase = 0;
-  how_many = 0;
   allDone = false;
-  select_elements();
 }
 
 function draw() {
@@ -52,21 +55,23 @@ function draw() {
   }
 
 }
-function perfect_ratio(){
+function perfect_ratio(offset){
   let res = [];
   if(gridWidth<gridHeight){
     res[0] = gridWidth/800;
   } else if(gridHeight<gridWidth){
     res[0] = gridWidth/gridHeight;
   }
-  res[1] = offset.copy();
-  res[0] = map(res[0], 0.5, res[0], 0.5, 1.8, true);
+  // removed the offset cause css is tidier
+  res[1] = createVector(0, cellHeight/10);
+
+  res[0] = 1;
   return res;
 }
 
 function findImageSpots() {
-  offset = createVector(gridWidth*0.05, gridHeight*0.05);
-  scale_t = perfect_ratio();
+  let offset = createVector(gridWidth*0.05, gridHeight*0.05);
+  let scale_t = perfect_ratio(offset);
   agent_radius = 7;
   myself.loadPixels();
   // the image is B&W so r, g, and b values are the same
@@ -89,8 +94,8 @@ function findImageSpots() {
 }
 
 function sendAgents() {
-  how_many += 13;
-  for (let i = 0; i < how_many -1 && i < rockets.length; i++) {
+  spawns_per_loop += 13;
+  for (let i = 0; i < spawns_per_loop -1 && i < rockets.length; i++) {
     if(rockets[i].done){
       counter++;
     }
@@ -124,12 +129,4 @@ function draw_background(){
     ellipse(random(gridWidth), random(gridHeight), random(gridWidth/3));
   }
   pop();
-}
-
-function select_elements(){
-  home_frame = select('#homeFrame')
-  det_name = select('#name')
-  det_city = select('#city')
-  det_interests = select('#interests')
-  det_social = select('#social')
 }

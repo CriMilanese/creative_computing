@@ -9,19 +9,17 @@ html body {
 
 .grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 2fr 1fr;
   grid-template-rows: 2fr 2fr;
   margin-left: 15%;
-  margin-right: 15%;
-  max-width: 60%;
+  max-width: 70%;
   max-height: 100%;
+  gap: 2% 6%;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  width: auto;
-  height: auto;
   max-width: 500px;
   background-size: cover;
   background-position: center;
@@ -35,15 +33,19 @@ html body {
   color: #000;
   font-size: 2vw;
   font-weight: bold;
-  margin: 20% 0;
+  margin: 17% 0;
   position: relative;
  }
 
+.firstRow {
+  max-height: 90vh;
+}
+
  #face{
    overflow: hidden;
-   max-width: 700px;
    margin: 0;
    padding: 0;
+   max-width: 700px;
  }
 
 /* .card:hover {
@@ -100,7 +102,6 @@ html body {
   text-align: center;
   text-decoration: none;
   margin: 0.5% 0.2%;
-
 }
 
 .fa:hover {
@@ -183,12 +184,15 @@ html body {
   .details {
     font-size: 30px;
   }
+
+  .grid {
+    margin-right: 16%;
+  }
 }
 
-@media screen and (max-width: 400) {
+@media screen and (max-width: 800px) {
   .grid {
     margin-left: 0;
-    margin-right: 0;
     max-width: 100%;
   }
 
