@@ -3,7 +3,6 @@ let phase;
 let cnv, bright;
 let rockets = [];
 let how_many, allDone, scale_t, offset, counter;
-let bodyBgColor;
 const blotStep = 6;
 
 // DOM components
@@ -18,7 +17,7 @@ function preload() {
 }
 
 function setup() {
-  myself.resize(windowWidth/5, 0);
+  myself.resize(windowWidth/5.5, 0);
   cnv = createCanvas(windowWidth, windowHeight);
   cnv.parent('face');
   pixelDensity(1);
@@ -27,7 +26,6 @@ function setup() {
   phase = 0;
   how_many = 0;
   allDone = false;
-  bodyBgColor = color('#e69665');
   select_elements();
 }
 
@@ -35,8 +33,6 @@ function draw() {
   updateSize();
   switch (phase) {
     case 0:
-      background(bodyBgColor);
-      draw_background();
       sendAgents();
       break;
     case 1:
@@ -64,7 +60,7 @@ function perfect_ratio(){
 }
 
 function findImageSpots() {
-  offset = createVector(windowWidth*0.2, windowHeight*0.03);
+  offset = createVector(windowWidth*0.03, windowHeight*0.05);
   scale_t = perfect_ratio();
   agent_radius = 7;
   myself.loadPixels();
