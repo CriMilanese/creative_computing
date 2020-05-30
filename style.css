@@ -6,24 +6,27 @@ html {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url('images/background.png');
+  background-image: url('images/background_web_cv2.png');
+}
+
+body {
+  overflow-y: hidden;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 40vh 40vh 20vh;
   margin-left: 15%;
+  margin-right: auto;
   max-width: 60%;
   max-height: 97vh;
-  height: 100%;
-  gap: 0% 4%;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  max-width: 750px;
+  /* max-width: 1000px; */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -32,7 +35,7 @@ html {
 
 .details {
   grid-row-start: 1;
-  grid-row-end: 2;
+  grid-row-end: 3;
   grid-column-start: 2;
   grid-column-end: 3;
   font-family: 'Source Serif Pro', serif;
@@ -43,20 +46,31 @@ html {
   margin: 10vh 0 0 0;
  }
 
-.details p {
+ .social {
+   color: #000000;
+   font-size: 160%;
+   margin: auto 0;
+   text-align: center;
+   grid-row-start: 3;
+   grid-row-end: 4;
+   grid-column-start: 1;
+   grid-column-end: 3;
+ }
+
+p.detail {
   margin: 5% 0;
 }
 
  #face{
    grid-row-start: 1;
-   grid-row-end: 2;
+   grid-row-end: 4;
    grid-column-start: 1;
    grid-column-end: 3;
-   /* overflow: hidden; */
    margin: 0;
    padding: 0;
-   max-width: 500px;
-   height: auto;
+   /* max-width: 1000px; */
+   height: 100%;
+   width: inherit;
  }
 
 /* .card:hover {
@@ -66,7 +80,7 @@ html {
 #name {
   font-size: 300%;
   color: #000000;
-  margin: 8% 0;
+  margin: 8% 0 2% 0%;
   animation: opac 3s linear 2s;
   animation-direction: normal;
   animation-fill-mode: both;
@@ -98,71 +112,58 @@ html {
   animation-iteration-count: 1;
 }
 
-#social {
+.bio {
+  display: none;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
   color: #000000;
-  font-size: 160%;
-  margin-top: 10%;
+  background-color: rgba(255,255,255,0);
+  font-family: 'Source Serif Pro', serif;
+  font-size: 2vw;
+  text-align: center;
+  vertical-align: middle;
+  margin: 15% 5%;
 }
 
-#bio {
-  color: #000000;
-  grid-column-start: 1;
-  grid-column-end: 3;
+#my_bio {
+  margin: auto auto;
+
 }
 
 .fa {
   padding: 1%;
-  width: 15%;
+  width: 5%;
   color: white;
   text-align: center;
-  border-radius: 5%;
+  border-radius: 8%;
   vertical-align: middle;
   text-decoration: none;
-  margin: 0.5% 0.2%;
 }
 
 .fa:hover {
     opacity: 0.7;
     box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
-    transform: translateY(-3px) scale(1.1);
+      transform: translateY(-3px) scale(1.1);
 }
 
 .fa-github {
   background: #ffffff;
   color: black;
-  /* animation: slide_in_left 3s linear 10s; */
-  /* animation: opac 3s linear 10s;
-  animation-direction: normal;
-  animation-fill-mode: both;
-  animation-iteration-count: 1; */
 }
 
 .fa-facebook {
   background: #3B5998;
-  /* animation: slide_in_left 3s linear 6s; */
-  /* animation: opac 3s linear 10s;
-  animation-direction: normal;
-  animation-fill-mode: both;
-  animation-iteration-count: 1; */
 }
 
 .fa-linkedin {
   background: #007bb5;
-  /* animation: slide_in_left 3s linear 9s; */
-  /* animation: opac 3s linear 7s;
-  animation-direction: normal;
-  animation-fill-mode: both;
-  animation-iteration-count: 1; */
 }
 
 
 .fa-instagram {
   background: #125688;
-  /* animation: slide_in_left 3s linear 12s; */
-  /* animation: opac 3s linear 9s;
-  animation-direction: normal;
-  animation-fill-mode: both;
-  animation-iteration-count: 1; */
 }
 
 @media screen and (min-width: 1350px) {
@@ -171,25 +172,36 @@ html {
   }
 
   #face {
-    margin-left: 8%;
+    margin-left: 0%;
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 100vh) {
   .grid {
     margin-left: 0;
     max-width: 100%;
   }
 
   .details {
-    margin-top: 8vh;
-    font-size: 15px;
-    padding-right: 5%;
+    grid-column-start: 1;
+    text-align: right;
+    margin-top: 4vh;
+    font-size: 6vw;
+    padding-right: 0%;
+  }
+
+  p.detail {
+    margin:auto 0;
+  }
+
+  .card {
+
   }
 
   #face {
-    margin-left: 8%;
+    /* margin-left: 3%; */
   }
+
 }
 
 @keyframes opac {
