@@ -33,8 +33,10 @@ function Agent(tx, ty, radius){
     if(!this.done){
       this.update(spd);
       this.pos.add(this.vel);
-    } else if(this.state != 'idle') {
+    } else {
+      if(this.state != 'idle') {
         this.state = 'idle';
+      }
     }
   }
 
@@ -45,5 +47,8 @@ function Agent(tx, ty, radius){
     fill(102, 34, 27);
     noStroke();
     ellipse(this.pos.x, this.pos.y, this.r);
+  }
+
+  this.applyForce = function() {
   }
 }
