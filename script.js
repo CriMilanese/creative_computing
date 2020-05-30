@@ -9,6 +9,7 @@ let gridWidth, gridHeight;
 let cell, cellHeight, cellWidth;
 let spawns_per_loop = 0;
 let rnd;
+let fib_a = 1, fib_b = 1;
 
 function preload() {
   myself = loadImage('images/me.png');
@@ -39,11 +40,17 @@ function draw() {
       sendAgents();
       break;
     case 1:
+      // pitch black
       grow();
       break;
     case 2:
+      // dripping color
+      // push()
+      // fill(0)
+      // rect(0, 0, cellWidth, cellHeight, 15);
+      // pop();
 
-
+      noLoop();
       break;
     default:
       break;
@@ -51,12 +58,15 @@ function draw() {
 }
 
 function perfect_ratio(){
-  if(gridWidth<=gridHeight){
-    myself.resize(cellWidth/1.4, 0);
-  } else if(gridHeight<gridWidth){
-    myself.resize(0, cellHeight/1.4);
+  let res = 0;
+  if(windowWidth<=windowHeight){
+    myself.resize(cellWidth/2.5, 0);
+    res = createVector(cellWidth/8, cellHeight/2.8);
+  } else {
+    myself.resize(0, cellHeight/1.5);
+    res = createVector(cellWidth/15, cellHeight/10)
   }
-  return createVector(cellWidth/20, cellHeight/10);
+  return res;
 }
 
 function findImageSpots() {
@@ -88,7 +98,7 @@ function sendAgents() {
       counter++;
     }
     rockets[i].show();
-    rockets[i].move(25);
+    rockets[i].move(35);
   }
   if(counter == rockets.length){
     allDone = true;
@@ -99,19 +109,27 @@ function sendAgents() {
   }
 }
 
-function mousePressed() {
-  phase = 1;
-  loop();
-}
 function grow(){
-  for (var i = 0; i < spawns_per_loop; i++) {
-    rockets[i].show();
+  for (var i = 0; i < rockets.length; i++) {
+    if(rockets[i].done){
+      rockets[i].show();
+    }
   }
-  rockets[rnd].r += 4;
+  if(fib_a < 1000){
+    let tmp = fib_a;
+    fib_a += fib_b;
+    fib_b = tmp/2;
+    rockets[rnd].r += fib_a;
+  } else {
+    $(".details").hide();
+    phase = 2;
+  }
 }
 
 function updateSize(){
-  cnv.resize(gridWidth, gridHeight);
+  cellWidth = cell.offsetWidth;
+  cellHeight = cell.offsetHeight;
+  cnv.resize(cellWidth, cellHeight);
 }
 
 // jquery methods
@@ -121,4 +139,20 @@ $(function() {
   $('.fa-linkedin').hide().delay(7000).slideDown(300);
   $('.fa-instagram').hide().delay(8000).slideDown(300);
   $('.fa-facebook').hide().delay(9000).slideDown(300);
+  $('.bio').hide();
+});
+
+$(document).click(function() {
+  loop();
+  phase=1;
+  setTimeout(function(){
+    $('.bio').fadeIn(500);
+    $('.bio').css("display", "flex");
+    $('.bio').mouseenter(function(){
+      $('#my_bio').html("My engineering passion led me to focus on computer sciences, in particular embedded systems, while expressing my creativity through front-end development");
+    });
+    $('.bio').mouseleave(function(){
+      $('#my_bio').html("Bio");
+    });
+  }, 2000);
 });
