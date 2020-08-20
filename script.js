@@ -63,7 +63,7 @@ function perfect_ratio(){
     myself.resize(cellWidth/2.5, 0);
     res = createVector(cellWidth/8, cellHeight/2.8);
   } else {
-    myself.resize(0, cellHeight/1.5);
+    myself.resize(0, cellHeight/1.8);
     res = createVector(cellWidth/15, cellHeight/10)
   }
   return res;
