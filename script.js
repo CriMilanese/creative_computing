@@ -132,8 +132,21 @@ function updateSize(){
   cnv.resize(cellWidth, cellHeight);
 }
 
-// jquery methods
+function githubPage(){
+  window.open('https://github.com/CriMilanese', '_blank');
+}
+function facebookPage(){
+  window.open('https://facebook.com/CriMilanese7', '_blank');
+}
+function instaPage(){
+  window.open('https://instagram.com/elmilanes', '_blank');
+}
+function linkedinPage(){
+  window.open('https://www.linkedin.com/in/cristianomilanese', '_blank');
+}
 
+// jquery methods
+// at html loading complete
 $(function() {
   $('.fa-github').hide().delay(6000).slideDown(300);
   $('.fa-linkedin').hide().delay(7000).slideDown(300);
@@ -152,7 +165,7 @@ $(document).click(function() {
       $('#my_bio').html("My engineering passion led me to focus on computer sciences, in particular embedded systems, while expressing my creativity through front-end development");
     });
     $('.bio').mouseleave(function(){
-      $('#my_bio').html("Bio");
+      $('#my_bio').html("I am glad you are interested in knowing more about me, but this site is still under development..");
     });
   }, 2000);
 });
