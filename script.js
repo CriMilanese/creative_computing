@@ -151,7 +151,7 @@ function facebookPage(){
   }, 1000);
 }
 function instaPage(){
-  window.open('https://instagram.com/_u/elmilanes/', '_blank');
+  window.open('instagram://user?username=elmilanes', '_blank');
 }
 function linkedinPage(){
   window.open('https://www.linkedin.com/in/cristianomilanese', '_blank');
