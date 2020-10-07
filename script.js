@@ -143,7 +143,7 @@ function githubPage(){
   },1000);
 }
 function facebookPage(){
-  let appWindow = window.open('https://facebook.com/CriMilanese7', '_blank');
+  let appWindow = window.open('fb://profile/100000686899395', '_blank');
   setTimeout( function () {
     if(appWindow) {
       appWindow.location = "https:://facebook.com/CriMilanese7";
