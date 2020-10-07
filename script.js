@@ -134,13 +134,24 @@ function updateSize(){
 }
 
 function githubPage(){
-  window.open('https://github.com/CriMilanese', '_blank');
+  window.open();
+  let appWindow = window.open('https://github.com/CriMilanese', '_blank');
+  setTimeout( function () {
+    if (appWindow) {
+      appWindow.location ="https://github.com/CriMilanese";
+    }
+  },1000);
 }
 function facebookPage(){
-  window.open('https://facebook.com/CriMilanese7', '_blank');
+  let appWindow = window.open('https://facebook.com/CriMilanese7', '_blank');
+  setTimeout( function () {
+    if(appWindow) {
+      appWindow.location = "https:://facebook.com/CriMilanese7";
+    }
+  }, 1000);
 }
 function instaPage(){
-  window.open('https://instagram.com/elmilanes', '_blank');
+  window.open('https://instagram.com/_u/elmilanes/', '_blank');
 }
 function linkedinPage(){
   window.open('https://www.linkedin.com/in/cristianomilanese', '_blank');
