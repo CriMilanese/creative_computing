@@ -42,6 +42,7 @@ function draw() {
     case 1:
       // pitch black
       grow();
+
       break;
     case 2:
       // dripping color
@@ -157,7 +158,7 @@ $(function() {
 
 $(document).click(function() {
   loop();
-  phase=1;
+  if(phase<2){phase=1;}
   setTimeout(function(){
     $('.bio').fadeIn(500);
     $('.bio').css("display", "flex");
@@ -168,4 +169,6 @@ $(document).click(function() {
       $('#my_bio').html("I am glad you are interested in knowing more about me, but this site is still under development..");
     });
   }, 2000);
+
+
 });
