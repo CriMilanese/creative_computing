@@ -10,48 +10,98 @@ html {
 }
 
 body {
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 40vh 40vh 20vh;
+  grid-template-rows: 10vh 40vh 30vh 20vh;
   margin-left: 15%;
   margin-right: auto;
   max-width: 60%;
-  max-height: 100vh;
+  max-height: 99vh;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  background-size: cover;
+  max-width: inherit;
+  /* background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0); */
 }
 
-.details {
+.navigator {
+  display: flex;
+  position: fixed;
+  background-color: green;
+  align-items: center;
   grid-row-start: 1;
-  grid-row-end: 3;
-  grid-column-start: 2;
+  grid-row-end: 2;
+  grid-column-start: 1;
   grid-column-end: 3;
   font-family: 'Source Serif Pro', serif;
-  text-align: center;
+  text-align: right;
   color: #000;
   font-size: 2vw;
   font-weight: bold;
-  margin: 10vh 0 0 0;
+  margin: 0;
+  width: inherit;
+}
+
+scroll-container {
+  display: inline-block;
+  width: inherit;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  scrollbar-width: none;
+  scrollbar-height: none;
+  scroll-snap-type: x mandatory;
+}
+
+scroll-page {
+  display: inline-block;
+  height: inherit;
+  width: 100%;
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* works on Chrome, Opera and Safari*/
+scroll-container::-webkit-scrollbar {
+  display: none;
+}
+/* works on Chrome, Opera and Safari*/
+scroll-page::-webkit-scrollbar {
+  display: none;
+}
+
+
+.details {
+  grid-row-start: 2;
+  grid-row-end: 4;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  font-family: 'Source Serif Pro', serif;
+  text-align: right;
+  color: #000;
+  font-size: 2vw;
+  font-weight: bold;
+  margin: 0;
  }
 
  .social {
    color: #000000;
    font-size: 160%;
-   margin: auto 0;
+   margin: 0;
    text-align: center;
-   grid-row-start: 3;
-   grid-row-end: 4;
+   grid-row-start: 4;
+   grid-row-end: 5;
    grid-column-start: 1;
    grid-column-end: 3;
  }
@@ -60,21 +110,16 @@ p.detail {
   margin: 5% 0;
 }
 
- #face{
-   grid-row-start: 1;
-   grid-row-end: 4;
-   grid-column-start: 1;
-   grid-column-end: 3;
-   margin: 0;
-   padding: 0;
-   /* max-width: 1000px; */
-   height: 100%;
-   width: inherit;
- }
-
-/* .card:hover {
-
- } */
+#face{
+ grid-row-start: 1;
+ grid-row-end: 5;
+ grid-column-start: 1;
+ grid-column-end: 3;
+ margin: 0;
+ padding: 0;
+ height: 100%;
+ width: inherit;
+}
 
 #name {
   font-size: 300%;
@@ -113,8 +158,8 @@ p.detail {
 
 .bio {
   display: none;
-  grid-row-start: 1;
-  grid-row-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 4;
   grid-column-start: 2;
   grid-column-end: 3;
   color: #000000;
@@ -165,6 +210,7 @@ p.detail {
   background: #125688;
 }
 
+/* for large screen, containers should stay in the center and stop scaling */
 @media screen and (min-width: 1350px) {
   .details {
     font-size: 28px;
@@ -175,6 +221,7 @@ p.detail {
   }
 }
 
+/* for smaller screens */
 @media screen and (max-width: 100vh) {
   .grid {
     margin-left: 0;
