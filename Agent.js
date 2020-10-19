@@ -5,22 +5,18 @@
 function Agent(tx, ty, radius){
   this.pos = createVector(random(gridWidth), random(gridHeight));
   this.target = createVector(tx, ty);
+  this.acceleration = createVector();
   this.vel = p5.Vector.random2D();
   this.done = false;
   this.r = radius;
-  this.acc = 10;
   // possible states are idle or 's' for showing
   this.state = 'idle';
 
-  this.updateAcc = function(){
-    this.acc *= 0.8;
-  }
-
   this.update = function(speed){
     this.vel = p5.Vector.sub(this.target, this.pos);
-    this.updateAcc();
+    this.acceleration.mult(0.8);
     if(this.vel.mag() > speed){
-      this.vel.normalize().mult(speed).add(this.acc);
+      this.vel.normalize().mult(speed).add(this.acceleration);
     } else {
       this.done = true;
     }
@@ -30,13 +26,10 @@ function Agent(tx, ty, radius){
     if(this.state != 'mov'){
       this.state = 'mov';
     }
-    if(!this.done){
-      this.update(spd);
-      this.pos.add(this.vel);
-    } else {
-      if(this.state != 'idle') {
-        this.state = 'idle';
-      }
+    this.update(spd);
+    this.pos.add(this.vel);
+    if(this.state != 'idle') {
+      this.state = 'idle';
     }
   }
 
@@ -47,8 +40,5 @@ function Agent(tx, ty, radius){
     fill(102, 34, 27);
     noStroke();
     ellipse(this.pos.x, this.pos.y, this.r);
-  }
-
-  this.applyForce = function() {
   }
 }
