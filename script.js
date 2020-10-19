@@ -33,29 +33,25 @@ function setup() {
   allDone = false;
 }
 
+/* I use a variable to make the website a state machine and make the elements
+  behave accordingly to the phase they are in */
 function draw() {
-  updateSize();
+  updateCanvasSize();
   switch (phase) {
     case 0:
-      sendAgents();
+      sendAgents(35);
       break;
     case 1:
-      // pitch black
-      grow();
-
+      sendAgents(30);
       break;
     case 2:
-      // dripping color
-      // push()
-      // fill(0)
-      // rect(0, 0, cellWidth, cellHeight, 15);
-      // pop();
-
+      // would like to scroll to show few tabs to click
       noLoop();
       break;
     default:
       break;
   }
+
 }
 
 function perfect_ratio(){
@@ -70,6 +66,7 @@ function perfect_ratio(){
   return res;
 }
 
+/* for efficiency purposes I calculate points only at the begin */
 function findImageSpots() {
   let scale_t = perfect_ratio();
   agent_radius = 7;
@@ -93,13 +90,13 @@ function findImageSpots() {
   }
 }
 
-function sendAgents() {
+/* here I spawn rockets outside the screen and drive them towards their targets */
+function sendAgents(speed) {
   for (let i = 0; i < spawns_per_loop -1 && i < rockets.length; i++) {
-    if(rockets[i].done){
-      counter++;
-    }
     rockets[i].show();
-    rockets[i].move(35);
+    rockets[i].move(speed);
+    if(rockets[i].done)
+      counter++;
   }
   if(counter == rockets.length){
     allDone = true;
@@ -110,24 +107,48 @@ function sendAgents() {
   }
 }
 
+/* when a click occurs on the document a random agent grows in size and covers
+  it as a transiction to page 2 */
 function grow(){
   for (var i = 0; i < rockets.length; i++) {
     if(rockets[i].done){
       rockets[i].show();
     }
   }
-  if(fib_a < 1000){
-    let tmp = fib_a;
-    fib_a += fib_b;
-    fib_b = tmp/2;
-    rockets[rnd].r += fib_a;
-  } else {
-    $(".details").hide();
-    phase = 2;
+  // if(fib_a < 1000){
+  //   let tmp = fib_a;
+  //   fib_a += fib_b;
+  //   fib_b = tmp/2;
+  //   rockets[rnd].r += fib_a;
+  // } else {
+  //   $(".details").hide();
+  //   phase = 2;
+  // }
+}
+
+function dropBomb(){
+  let bomb = createVector(mouseX, mouseY);
+  for (let k = 0; k < rockets.length; k++) {
+    let distance = p5.Vector.sub(bomb, rockets[k].pos);
+    let effect = map(distance.mag(), 0, 300, 50, 0, true);
+    let scared = p5.Vector.sub(rockets[k].pos, bomb);
+    scared.setMag(effect);
+    rockets[k].acceleration.add(scared);
   }
 }
 
-function updateSize(){
+function retarget(){
+  // move destination to something
+  for(i=0; i<rockets.length; i++){
+
+  }
+
+  // move the target point of each agent to destination
+
+}
+
+// adapt canvas size to window size
+function updateCanvasSize(){
   cellWidth = cell.offsetWidth;
   cellHeight = cell.offsetHeight;
   cnv.resize(cellWidth, cellHeight);
@@ -142,6 +163,7 @@ function githubPage(){
     }
   },1000);
 }
+
 function facebookPage(){
   let appWindow = window.open('fb://profile/100000686899395', '_blank');
   setTimeout( function () {
@@ -150,11 +172,27 @@ function facebookPage(){
     }
   }, 1000);
 }
+
 function instaPage(){
   window.open('instagram://user?username=elmilanes', '_blank');
 }
+
 function linkedinPage(){
   window.open('https://www.linkedin.com/in/cristianomilanese', '_blank');
+}
+
+function send_mail(){
+  Email.send({
+    Host: "smtp.gmail.com",
+    Username : "people.first.infomail@gmail.com",
+    Password : "dMM3rnUW3mu73J7",
+    To : 'it4ll.infobox@gmail.com',
+    From : "people.first.infomail@gmail.com",
+    Subject : "feedback",
+    Body : $("#fb").val(),
+  }).then(
+    message => alert("mail sent successfully")
+  );
 }
 
 // jquery methods
@@ -167,19 +205,36 @@ $(function() {
   $('.bio').hide();
 });
 
-$(document).click(function() {
-  loop();
-  if(phase<2){phase=1;}
-  setTimeout(function(){
-    $('.bio').fadeIn(500);
-    $('.bio').css("display", "flex");
-    $('.bio').mouseenter(function(){
-      $('#my_bio').html("My engineering passion led me to focus on computer sciences, in particular embedded systems, while expressing my creativity through front-end development");
-    });
-    $('.bio').mouseleave(function(){
-      $('#my_bio').html("I am glad you are interested in knowing more about me, but this site is still under development..");
-    });
-  }, 2000);
+$(function(){
+  $('#pagetwo_grid').hide();
+})
+//
+// $("scroll-page").scroll(function(){
+//   loop();
+//   if(phase<2){phase=1;}
+//   transform_1()
+// })
 
 
-});
+
+  $(document).click(function() {
+    loop();
+    for(i=0;i<rockets.length;i++){
+      rockets[i].done = false;
+    }
+    dropBomb();
+    // setTimeout(function(){noLoop; }, 1000);
+    // if(phase<2){phase=1;}
+    // setTimeout(function(){
+    //   $('.bio').fadeIn(500);
+    //   $('.bio').css("display", "flex");
+    //   $('.bio').mouseenter(function(){
+    //     $('#my_bio').html("My engineering passion led me to focus on computer sciences, in particular embedded systems, while expressing my creativity through front-end development");
+    //   });
+    //   $('.bio').mouseleave(function(){
+    //     $('#my_bio').html("I am glad you are interested in knowing more about me, but this site is still under development..");
+    //   });
+    // }, 2000);
+
+
+  });
