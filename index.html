@@ -9,18 +9,50 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="Agent.js"></script>
+    <script type="text/javascript" src="https://smtpjs.com/v3/smtp.js"></script>
     <link rel='stylesheet' href='style.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div class="grid">
+        <nav class="navigator">
+          <a href="#info_page">info</a>
+          <a href="#project_page">projects</a>
+          <a href="#contact_page">support</a>
+        </nav>
+      </ul>
       <div class="card" id="face">
       </div>
       <div class="card details">
-          <p id="name" class="detail">Cristiano <br>Milanese</p>
-          <p id="title" class="detail">Software <br> developer</p>
-          <p id="city" class="detail">Amsterdam <br> Noord-Holland</p>
-          <p id="status" class="detail">Vrije Universiteit <br> 3rd year B Computer Science </p>
+        <scroll-container>
+          <scroll-page id="info_page" class="detail">
+            <p id="name">Cristiano <br>Milanese</p>
+            <p id="title">full stack <br> embedded software developer</p>
+            <p id="city">Amsterdam <br>Noord-Holland</p>
+            <p id="status">Vrije Universiteit <br> 3rd year B Computer Science </p>
+            <!-- <p>all wind up I entered the room, while
+              she was still <br> pulling on my arm trying non-sensical justification for her behavior</p>
+            <p> I realized they would stare at me only <br> when I would turn,
+              but they kept burping as they were <br> closing on from behind</p>
+            <p> friends are like wine, as you care for them <br> they taste better</p>
+            <p> galloping the winning horse is a matter of practice</p> -->
+          </scroll-page>
+          <scroll-page id="project_page" class="detail">
+            <p>I have plenty of projects going on</p>
+            <p>this is sometimes good <br> sometimes bad </p>
+            <p>but maybe you can help me!</p>
+            <p>scroll next to leave a feedback</p>
+            <p>or text me on my social</p>
+          </scroll-page>
+          <scroll-page id="contact_page" class="detail">
+            <p>you can leave a message explaining the problem you have</p>
+            <input type="message" name="feedback" id="fb"> insert your message here..</input>
+            <p>we do not ask you any personal information</p>
+            <p>but in order to keep this possible <br> please limit your message to an introduction to your problem</p>
+            <p>we can always move the conversation to other platforms</p>
+            <button type="button" name="send_message" onclick="send_mail">send</button>
+          </scroll-page>
+        </scroll-container>
       </div>
       <div class="card social">
         <p>
