@@ -183,9 +183,7 @@ function linkedinPage(){
 
 function send_mail(){
   Email.send({
-    Host: "smtp.gmail.com",
-    Username : "people.first.infomail@gmail.com",
-    Password : "dMM3rnUW3mu73J7",
+    SecureToken: "5611f265-9090-4817-a289-c00acbea3825",
     To : 'it4ll.infobox@gmail.com',
     From : "people.first.infomail@gmail.com",
     Subject : "feedback",
@@ -193,6 +191,7 @@ function send_mail(){
   }).then(
     message => alert("mail sent successfully")
   );
+  console.log($("#fb").val());
 }
 
 // jquery methods
