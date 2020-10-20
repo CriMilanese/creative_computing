@@ -43,10 +43,10 @@ function draw() {
   updateCanvasSize();
   switch (phase) {
     case 0:
-      sendAgents('arrive', 30);
+      sendAgents('arrive', 29);
       break;
     case 1:
-      sendAgents('wonder', 12);
+      sendAgents('wonder', 8);
       break;
     case 2:
       // would like to scroll to show few tabs to click
@@ -60,6 +60,7 @@ function draw() {
 
 /* here I spawn rockets outside the screen and drive them towards their targets */
 function sendAgents(mode, speed) {
+  counter = 0;
   for (let i = 0; i < spawns_per_loop - 1 && i < rockets.length; i++) {
     rockets[i].show();
     rockets[i].move(mode, speed);
@@ -68,7 +69,7 @@ function sendAgents(mode, speed) {
     }
   }
   if (counter == rockets.length - 1) {
-    allDone = true;
+    // allDone = true;
     console.log('blocking the loop');
     noLoop();
   } else {
@@ -77,7 +78,6 @@ function sendAgents(mode, speed) {
     } else {
       spawns_per_loop += 20;
     }
-    counter = 0;
   }
 }
 
@@ -96,16 +96,7 @@ function perfect_ratio() {
 /* for efficiency purposes I calculate points only at the begin */
 function findImageSpots() {
   let pr = perfect_ratio();
-  // console.log(pr);
-  switch (phase) {
-    case 0:
-      initAgents(myself, pr);
-      break;
-    case 1:
-      // boat.loadPixels();
-      reTarget(boat, pr);
-    default:
-  }
+  initAgents(myself, pr);
 }
 
 function initAgents(myImage, scale_t) {
@@ -140,15 +131,16 @@ function reTarget(image) {
 }
 
 function dropBomb() {
-  loop()
   let bomb = createVector(mouseX, mouseY);
   for (let k = 0; k < rockets.length; k++) {
     let distance = p5.Vector.sub(bomb, rockets[k].pos);
-    let effect = map(distance.mag(), 0, 300, 50, 0, true);
+    let effect = map(distance.mag(), 0, 300, 55, 0, true);
     let scared = p5.Vector.sub(rockets[k].pos, bomb);
     scared.setMag(effect);
+    rockets[k].done = false;
     rockets[k].applyForce(scared);
   }
+  loop()
 }
 
 // adapt canvas size to window size
@@ -156,14 +148,6 @@ function updateCanvasSize() {
   cellWidth = cell.offsetWidth;
   cellHeight = cell.offsetHeight;
   cnv.resize(cellWidth, cellHeight);
-}
-
-function prompt_motion() {
-  let tmp = rockets.length;
-  console.log(tmp);
-  for (i = 0; i < tmp; i++) {
-    rockets[i].done = false;
-  }
 }
 
 function morph(){
