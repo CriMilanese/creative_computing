@@ -5,40 +5,43 @@
 function Agent(tx, ty, radius){
   this.pos = createVector(random(gridWidth), random(gridHeight));
   this.target = createVector(tx, ty);
-  this.acceleration = createVector();
+  this.acc = createVector();
   this.vel = p5.Vector.random2D();
   this.done = false;
   this.r = radius;
-  // possible states are idle or 's' for showing
-  this.state = 'idle';
 
-  this.update = function(speed){
-    this.vel = p5.Vector.sub(this.target, this.pos);
-    this.acceleration.mult(0.8);
-    if(this.vel.mag() > speed){
-      this.vel.normalize().mult(speed).add(this.acceleration);
-    } else {
-      this.done = true;
+  this.updateBehavior = function(mode, speed){
+    switch(mode){
+      case 'wonder':
+        this.vel = p5.Vector.sub(this.target, this.pos);
+        this.vel.normalize().mult(speed).rotate(3);
+        break;
+      case 'arrive':
+        this.vel = p5.Vector.sub(this.target, this.pos);
+        this.acc.mult(0.8);
+        if(this.vel.mag() > speed/2){
+          this.vel.normalize().mult(speed).add(this.acc);
+        // } else {
+          // this.done = true;
+        }
+        break;
+      default:
+        break;
     }
   }
 
-  this.move = function(spd){
-    if(this.state != 'mov'){
-      this.state = 'mov';
-    }
-    this.update(spd);
+  this.move = function(mode, speed){
+    this.updateBehavior(mode, speed);
     this.pos.add(this.vel);
-    if(this.state != 'idle') {
-      this.state = 'idle';
-    }
   }
 
   this.show = function(){
-    if(this.state != 'show'){
-      this.state = 'show';
-    }
     fill(102, 34, 27);
     noStroke();
     ellipse(this.pos.x, this.pos.y, this.r);
+  }
+
+  this.applyForce = function(factor){
+    this.acc.add(factor)
   }
 }
