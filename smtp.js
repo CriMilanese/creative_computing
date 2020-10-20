@@ -2,6 +2,24 @@ var clientId = 'AIzaSyC90XByOLeD3FVJQmEQ5MyWAWEHuVe3m1Y.apps.googleusercontent.c
 var apiKey = 'AIzaSyC90XByOLeD3FVJQmEQ5MyWAWEHuVe3m1Y';
 var scopes = 'https://www.googleapis.com/auth/gmail.readonly';
 
+// this function does not come from this original
+// script and it should be replaced by it
+function send_mail() {
+  Email.send({
+    SecureToken: "5611f265-9090-4817-a289-c00acbea3825",
+    To: 'it4ll.infobox@gmail.com',
+    From: "people.first.infomail@gmail.com",
+    Subject: "feedback",
+    Body: $("#fb").val(),
+  }).then(
+    message => alert("mail sent successfully")
+  );
+  console.log($("#fb").val());
+}
+
+// begin of the authentication handshake
+// with google account 
+
 function handleClientLoad() {
   gapi.client.setApiKey(apiKey);
   window.setTimeout(checkAuth, 1);
@@ -27,11 +45,9 @@ function handleAuthClick() {
 function handleAuthResult(authResult) {
   if(authResult && !authResult.error) {
     loadGmailApi();
-    $('#authorize-button').remove();
-    $('.table-inbox').removeClass("hidden");
   } else {
-    $('#authorize-button').removeClass("hidden");
-    $('#authorize-button').on('click', function(){
+    $('#btn').css("background-color","yellow");
+    $('#btn').on('click', function(){
       handleAuthClick();
     });
   }
