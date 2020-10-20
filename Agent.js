@@ -27,7 +27,8 @@ function Agent(tx, ty, radius) {
         break;
       case 'wonder':
         this.vel = p5.Vector.sub(this.target, this.pos);
-        this.vel.normalize().mult(speed).rotate(3);
+        let angle = int(random(-5, 5))
+        this.vel.normalize().mult(speed).rotate(angle);
         break;
       default:
         break;
