@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <div class="grid">
+    <div class="grid" onclick="dropBomb()">
         <nav class="navigator">
           <a href="#info_page">info</a>
           <a href="#project_page">projects</a>
@@ -28,7 +28,7 @@
       <div class="card" id="face">
       </div>
       <div class="card details">
-        <scroll-container onscroll="metamorphosy">
+        <scroll-container class="scroll-grid" onscroll="morph()">
           <scroll-page id="info_page" class="detail">
             <p id="name">Cristiano <br>Milanese</p>
             <p id="title">full stack <br> embedded software developer</p>
@@ -51,7 +51,7 @@
           <scroll-page id="contact_page" class="detail">
             <p>you can leave a message explaining the problem you have</p>
             <input type="message" name="feedback" id="fb"> insert your message here..</input>
-            <button type="button" name="send_message" onclick="send_mail()">send</button> <br>
+            <button type="button" name="send_message" onclick="handleClientLoad()">send</button> <br>
             <p>we do not ask you any personal information</p>
             <p>but in order to keep this possible <br> please limit your message to an introduction of your problem</p>
             <p>we can always move the conversation to other platforms</p>
