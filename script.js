@@ -1,6 +1,6 @@
-let myself;
+let myself, boat; //images for rockets targets
 let phase;
-let cnv, bright;
+let cnv;
 let rockets = [];
 let allDone, counter;
 const blotStep = 6;
@@ -8,11 +8,17 @@ let grid;
 let gridWidth, gridHeight;
 let cell, cellHeight, cellWidth;
 let spawns_per_loop = 0;
-let rnd;
-let fib_a = 1, fib_b = 1;
+const agent_radius = 7;
+
+/*
+*  TODO: create a file containing the text-based coordinates for each
+*        image point selected, so that I do not have to load the image
+*        in the future.
+*/
 
 function preload() {
   myself = loadImage('images/me.png');
+  boat = loadImage('images/sailingBoat.png')
 }
 
 function setup() {
@@ -26,8 +32,6 @@ function setup() {
   cnv.parent('face');
   pixelDensity(1);
   findImageSpots();
-  // for when the user clicks
-  rnd = int(random(0, rockets.length));
   counter = 0;
   phase = 0;
   allDone = false;
@@ -39,10 +43,10 @@ function draw() {
   updateCanvasSize();
   switch (phase) {
     case 0:
-      sendAgents(35);
+      sendAgents('arrive', 30);
       break;
     case 1:
-      sendAgents(30);
+      sendAgents('wonder', 16);
       break;
     case 2:
       // would like to scroll to show few tabs to click
@@ -54,92 +58,76 @@ function draw() {
 
 }
 
-function perfect_ratio(){
-  let res = 0;
-  if(windowWidth<=windowHeight){
-    myself.resize(cellWidth/2.5, 0);
-    res = createVector(cellWidth/8, cellHeight/2.8);
+/* here I spawn rockets outside the screen and drive them towards their targets */
+function sendAgents(mode, speed) {
+  for (let i = 0; i < spawns_per_loop - 1 && i < rockets.length; i++) {
+    rockets[i].show();
+    rockets[i].move(mode, speed);
+    if (rockets[i].done)
+      counter++;
+  }
+  if (counter == rockets.length) {
+    allDone = true;
+    console.log('blocking the loop');
+    noLoop();
   } else {
-    myself.resize(0, cellHeight/1.8);
-    res = createVector(cellWidth/15, cellHeight/10)
+    spawns_per_loop += 20;
+    if (spawns_per_loop > rockets.length)
+      spawns_per_loop = rockets.length;
+    counter = 0;
+  }
+}
+
+function perfect_ratio() {
+  let res = 0;
+  if (windowWidth <= windowHeight) {
+    myself.resize(cellWidth / 2.5, 0);
+    res = createVector(cellWidth / 8, cellHeight / 2.8);
+  } else {
+    myself.resize(0, cellHeight / 1.8);
+    res = createVector(cellWidth / 15, cellHeight / 10)
   }
   return res;
 }
 
 /* for efficiency purposes I calculate points only at the begin */
 function findImageSpots() {
-  let scale_t = perfect_ratio();
-  agent_radius = 7;
-  myself.loadPixels();
+  let pr = perfect_ratio();
+  switch (phase) {
+    case 0:
+      myself.loadPixels();
+      setAgents(myself, pr);
+      break;
+    case 1:
+      boat.loadPixels();
+      reTarget(boat, pr);
+    default:
+  }
+}
+
+function setAgents(image, scale_t) {
   // the image is B&W so r, g, and b values are the same
-  for (var y = 0; y < myself.height; y+=blotStep) {
-      for (var x = 0; x < myself.width; x+=blotStep) {
-        let index = (x + y * myself.width) * 4;
-          if(index % 4 == 0){
-            if (myself.pixels[index] < 51 && myself.pixels[index+3] > 0) {
-              rockets.push(new Agent(x+scale_t.x, y+scale_t.y, agent_radius-1));
-            } else if (myself.pixels[index] >= 51 && myself.pixels[index] < 102) {
-              rockets.push(new Agent(x+scale_t.x, y+scale_t.y, agent_radius-2));
-            } else if (myself.pixels[index] >= 102 && myself.pixels[index] < 153) {
-              rockets.push(new Agent(x+scale_t.x, y+scale_t.y, agent_radius-4));
-            } else if (myself.pixels[index] >= 153 && myself.pixels[index] < 205) {
-              rockets.push(new Agent(x+scale_t.x, y+scale_t.y, agent_radius-5));
-            }
+  for (var y = 0; y < image.height; y += blotStep) {
+    for (var x = 0; x < image.width; x += blotStep) {
+      let index = (x + y * image.width) * 4;
+      if (index % 4 == 0) {
+        if (image.pixels[index] < 51 && image.pixels[index] >= 0) {
+          rockets.push(new Agent(x + scale_t.x, y + scale_t.y, agent_radius - 1));
+        } else if (image.pixels[index] >= 51 && image.pixels[index] < 102) {
+          rockets.push(new Agent(x + scale_t.x, y + scale_t.y, agent_radius - 2));
+        } else if (image.pixels[index] >= 102 && image.pixels[index] < 153) {
+          rockets.push(new Agent(x + scale_t.x, y + scale_t.y, agent_radius - 4));
+        } else if (image.pixels[index] >= 153 && image.pixels[index] < 205) {
+          rockets.push(new Agent(x + scale_t.x, y + scale_t.y, agent_radius - 5));
+        }
       }
     }
   }
 }
 
-/* here I spawn rockets outside the screen and drive them towards their targets */
-function sendAgents(speed) {
-  for (let i = 0; i < spawns_per_loop -1 && i < rockets.length; i++) {
-    rockets[i].show();
-    rockets[i].move(speed);
-    if(rockets[i].done)
-      counter++;
-  }
-  if(counter == rockets.length){
-    allDone = true;
-    noLoop();
-  } else {
-    spawns_per_loop += 20;
-    counter = 0;
-  }
-}
-
-/* when a click occurs on the document a random agent grows in size and covers
-  it as a transiction to page 2 */
-function grow(){
-  for (var i = 0; i < rockets.length; i++) {
-    if(rockets[i].done){
-      rockets[i].show();
-    }
-  }
-  // if(fib_a < 1000){
-  //   let tmp = fib_a;
-  //   fib_a += fib_b;
-  //   fib_b = tmp/2;
-  //   rockets[rnd].r += fib_a;
-  // } else {
-  //   $(".details").hide();
-  //   phase = 2;
-  // }
-}
-
-function dropBomb(){
-  let bomb = createVector(mouseX, mouseY);
-  for (let k = 0; k < rockets.length; k++) {
-    let distance = p5.Vector.sub(bomb, rockets[k].pos);
-    let effect = map(distance.mag(), 0, 300, 50, 0, true);
-    let scared = p5.Vector.sub(rockets[k].pos, bomb);
-    scared.setMag(effect);
-    rockets[k].acceleration.add(scared);
-  }
-}
-
-function retarget(){
+function reTarget(image) {
   // move destination to something
-  for(i=0; i<rockets.length; i++){
+  for (i = 0; i < rockets.length; i++) {
 
   }
 
@@ -147,93 +135,35 @@ function retarget(){
 
 }
 
+function dropBomb() {
+  let bomb = createVector(mouseX, mouseY);
+  for (let k = 0; k < rockets.length; k++) {
+    let distance = p5.Vector.sub(bomb, rockets[k].pos);
+    let effect = map(distance.mag(), 0, 300, 50, 0, true);
+    let scared = p5.Vector.sub(rockets[k].pos, bomb);
+    scared.setMag(effect);
+    rockets[k].applyForce(scared);
+  }
+}
+
 // adapt canvas size to window size
-function updateCanvasSize(){
+function updateCanvasSize() {
   cellWidth = cell.offsetWidth;
   cellHeight = cell.offsetHeight;
   cnv.resize(cellWidth, cellHeight);
 }
 
-function githubPage(){
-  window.open();
-  let appWindow = window.open('https://github.com/CriMilanese', '_blank');
-  setTimeout( function () {
-    if (appWindow) {
-      appWindow.location ="https://github.com/CriMilanese";
-    }
-  },1000);
+function prompt_motion() {
+  let tmp = rockets.length;
+  console.log(tmp);
+  for (i = 0; i < tmp; i++) {
+    rockets[i].done = false;
+  }
 }
 
-function facebookPage(){
-  let appWindow = window.open('fb://profile/100000686899395', '_blank');
-  setTimeout( function () {
-    if(appWindow) {
-      appWindow.location = "https:://facebook.com/CriMilanese7";
-    }
-  }, 1000);
-}
-
-function instaPage(){
-  window.open('instagram://user?username=elmilanes', '_blank');
-}
-
-function linkedinPage(){
-  window.open('https://www.linkedin.com/in/cristianomilanese', '_blank');
-}
-
-function send_mail(){
-  Email.send({
-    SecureToken: "5611f265-9090-4817-a289-c00acbea3825",
-    To : 'it4ll.infobox@gmail.com',
-    From : "people.first.infomail@gmail.com",
-    Subject : "feedback",
-    Body : $("#fb").val(),
-  }).then(
-    message => alert("mail sent successfully")
-  );
-  console.log($("#fb").val());
-}
-
-// jquery methods
-// at html loading complete
-$(function() {
-  $('.fa-github').hide().delay(6000).slideDown(300);
-  $('.fa-linkedin').hide().delay(7000).slideDown(300);
-  $('.fa-instagram').hide().delay(8000).slideDown(300);
-  $('.fa-facebook').hide().delay(9000).slideDown(300);
-  $('.bio').hide();
+$(document).click(function() {
+  loop();
+  prompt_motion();
+  // phase = 1;
+  dropBomb();
 });
-
-$(function(){
-  $('#pagetwo_grid').hide();
-})
-//
-// $("scroll-page").scroll(function(){
-//   loop();
-//   if(phase<2){phase=1;}
-//   transform_1()
-// })
-
-
-
-  $(document).click(function() {
-    loop();
-    for(i=0;i<rockets.length;i++){
-      rockets[i].done = false;
-    }
-    dropBomb();
-    // setTimeout(function(){noLoop; }, 1000);
-    // if(phase<2){phase=1;}
-    // setTimeout(function(){
-    //   $('.bio').fadeIn(500);
-    //   $('.bio').css("display", "flex");
-    //   $('.bio').mouseenter(function(){
-    //     $('#my_bio').html("My engineering passion led me to focus on computer sciences, in particular embedded systems, while expressing my creativity through front-end development");
-    //   });
-    //   $('.bio').mouseleave(function(){
-    //     $('#my_bio').html("I am glad you are interested in knowing more about me, but this site is still under development..");
-    //   });
-    // }, 2000);
-
-
-  });
