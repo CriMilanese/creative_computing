@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
-    <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="Agent.js"></script>
     <script type="text/javascript" src="https://smtpjs.com/v3/smtp.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="smtp.js"></script>
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="Agent.js"></script>
+    <script type="text/javascript" src="smtp.js"></script>
+    <script type="text/javascript" src="social.js"></script>
     <link rel='stylesheet' href='style.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
@@ -27,7 +28,7 @@
       <div class="card" id="face">
       </div>
       <div class="card details">
-        <scroll-container>
+        <scroll-container onscroll="metamorphosy">
           <scroll-page id="info_page" class="detail">
             <p id="name">Cristiano <br>Milanese</p>
             <p id="title">full stack <br> embedded software developer</p>
@@ -50,10 +51,10 @@
           <scroll-page id="contact_page" class="detail">
             <p>you can leave a message explaining the problem you have</p>
             <input type="message" name="feedback" id="fb"> insert your message here..</input>
+            <button type="button" name="send_message" onclick="send_mail()">send</button> <br>
             <p>we do not ask you any personal information</p>
-            <p>but in order to keep this possible <br> please limit your message to an introduction to your problem</p>
+            <p>but in order to keep this possible <br> please limit your message to an introduction of your problem</p>
             <p>we can always move the conversation to other platforms</p>
-            <button type="button" name="send_message" onclick="send_mail()">send</button>
           </scroll-page>
         </scroll-container>
       </div>
