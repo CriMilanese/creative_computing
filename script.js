@@ -18,7 +18,7 @@ const agent_radius = 7;
 
 function preload() {
   myself = loadImage('images/me.png');
-  boat = loadImage('images/sailingBoat.png')
+  // boat = loadImage('images/sailingBoat.png')
 }
 
 function setup() {
@@ -28,12 +28,12 @@ function setup() {
   cell = document.querySelector("#face");
   cellWidth = cell.offsetWidth;
   cellHeight = cell.offsetHeight;
+  counter = 0;
+  phase = 0;
   cnv = createCanvas(gridWidth, gridHeight);
   cnv.parent('face');
   pixelDensity(1);
   findImageSpots();
-  counter = 0;
-  phase = 0;
   allDone = false;
 }
 
@@ -46,7 +46,7 @@ function draw() {
       sendAgents('arrive', 30);
       break;
     case 1:
-      sendAgents('wonder', 16);
+      sendAgents('wonder', 12);
       break;
     case 2:
       // would like to scroll to show few tabs to click
@@ -63,17 +63,20 @@ function sendAgents(mode, speed) {
   for (let i = 0; i < spawns_per_loop - 1 && i < rockets.length; i++) {
     rockets[i].show();
     rockets[i].move(mode, speed);
-    if (rockets[i].done)
+    if (rockets[i].done){
       counter++;
+    }
   }
-  if (counter == rockets.length) {
+  if (counter == rockets.length - 1) {
     allDone = true;
     console.log('blocking the loop');
     noLoop();
   } else {
-    spawns_per_loop += 20;
-    if (spawns_per_loop > rockets.length)
+    if (spawns_per_loop > rockets.length){
       spawns_per_loop = rockets.length;
+    } else {
+      spawns_per_loop += 20;
+    }
     counter = 0;
   }
 }
@@ -93,31 +96,32 @@ function perfect_ratio() {
 /* for efficiency purposes I calculate points only at the begin */
 function findImageSpots() {
   let pr = perfect_ratio();
+  // console.log(pr);
   switch (phase) {
     case 0:
-      myself.loadPixels();
-      setAgents(myself, pr);
+      initAgents(myself, pr);
       break;
     case 1:
-      boat.loadPixels();
+      // boat.loadPixels();
       reTarget(boat, pr);
     default:
   }
 }
 
-function setAgents(image, scale_t) {
+function initAgents(myImage, scale_t) {
   // the image is B&W so r, g, and b values are the same
-  for (var y = 0; y < image.height; y += blotStep) {
-    for (var x = 0; x < image.width; x += blotStep) {
-      let index = (x + y * image.width) * 4;
+  myImage.loadPixels();
+  for (var y = 0; y < myImage.height; y += blotStep) {
+    for (var x = 0; x < myImage.width; x += blotStep) {
+      let index = (x + y * myImage.width) * 4;
       if (index % 4 == 0) {
-        if (image.pixels[index] < 51 && image.pixels[index] >= 0) {
+        if (myImage.pixels[index] < 51 && myImage.pixels[index] > 0) {
           rockets.push(new Agent(x + scale_t.x, y + scale_t.y, agent_radius - 1));
-        } else if (image.pixels[index] >= 51 && image.pixels[index] < 102) {
+        } else if (myImage.pixels[index] >= 51 && myImage.pixels[index] < 102) {
           rockets.push(new Agent(x + scale_t.x, y + scale_t.y, agent_radius - 2));
-        } else if (image.pixels[index] >= 102 && image.pixels[index] < 153) {
+        } else if (myImage.pixels[index] >= 102 && myImage.pixels[index] < 153) {
           rockets.push(new Agent(x + scale_t.x, y + scale_t.y, agent_radius - 4));
-        } else if (image.pixels[index] >= 153 && image.pixels[index] < 205) {
+        } else if (myImage.pixels[index] >= 153 && myImage.pixels[index] < 205) {
           rockets.push(new Agent(x + scale_t.x, y + scale_t.y, agent_radius - 5));
         }
       }
@@ -136,6 +140,7 @@ function reTarget(image) {
 }
 
 function dropBomb() {
+  loop()
   let bomb = createVector(mouseX, mouseY);
   for (let k = 0; k < rockets.length; k++) {
     let distance = p5.Vector.sub(bomb, rockets[k].pos);
@@ -161,9 +166,6 @@ function prompt_motion() {
   }
 }
 
-$(document).click(function() {
-  loop();
-  prompt_motion();
-  // phase = 1;
-  dropBomb();
-});
+function morph(){
+  phase = 1;
+}
