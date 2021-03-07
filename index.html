@@ -1,74 +1,235 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Yes, me again</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
-    <script type="text/javascript" src="https://smtpjs.com/v3/smtp.js"></script>
-    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
-    <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="Agent.js"></script>
-    <script type="text/javascript" src="smtp.js"></script>
-    <script type="text/javascript" src="social.js"></script>
-    <link rel='stylesheet' href='style.css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  </head>
-  <body>
-    <div class="grid" onclick="dropBomb()">
-        <nav class="navigator">
-          <a href="#info_page">info</a>
-          <a href="#project_page">projects</a>
-          <a href="#contact_page">support</a>
-        </nav>
+<head>
+  <title>Yes, me again</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bg-style.css">
+  <link rel='stylesheet' href='style.css'>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- <script type="text/javascript" src="https://smtpjs.com/v3/smtp.js"></script> -->
+  <!-- <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script> -->
+  <script type="text/javascript" src="script.js"></script>
+  <!-- <script type="text/javascript" src="Agent.js"></script> -->
+  <!-- <script type="text/javascript" src="smtp.js"></script> -->
+  <script type="text/javascript" src="social.js"></script>
+  <script type="text/javascript" src="bg-script.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="topbar-grid">
+      <!-- <div id="brand">IT4LL</div> -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a id="info" class="nav-link" onclick="scrollPage(this)"> Home </a>
+        </li>
+        <li class="nav-item">
+          <a id="projects" class="nav-link" onclick="scrollPage(this)"> Projects </a>
+        </li>
+        <li class="nav-item">
+          <a id="news" class="nav-link" onclick="scrollPage(this)"> News </a>
+        </li>
       </ul>
-      <div class="card" id="face">
-      </div>
-      <div class="card details">
-        <scroll-container class="scroll-grid" onscroll="morph()">
-          <scroll-page id="info_page" class="detail">
+      <button class="navbar-toggler" type="button">
+        <img class="navbar-toggler-icon" src="./images/hamb-menu2.png" alt="hamb">
+      </button>
+    </div>
+  </header>
+  <div id="bg-img">
+    <!-- the sea bottom that raises with scroll -->
+    <div id="page_filler"></div>
+  </div>
+  <div class="cnv" id="face"></div>
+  <div class="body-grid"> <!-- onclick="dropBomb()"> -->
+    <div class="card details">
+      <scroll-container class="scroll-grid">
+        <scroll-page id="info_page">
+          <div class="page-header">
             <p id="name">Cristiano <br>Milanese</p>
-            <p id="title">full stack <br> embedded software developer</p>
+            <p id="title">embedded full stack developer</p>
             <p id="city">Amsterdam <br>Noord-Holland</p>
             <p id="status">Vrije Universiteit <br> 3rd year B Computer Science </p>
-            <!-- <p>all wind up I entered the room, while
-              she was still <br> pulling on my arm trying non-sensical justification for her behavior</p>
-            <p> I realized they would stare at me only <br> when I would turn,
-              but they kept burping as they were <br> closing on from behind</p>
-            <p> friends are like wine, as you care for them <br> they taste better</p>
-            <p> galloping the winning horse is a matter of practice</p> -->
-          </scroll-page>
-          <scroll-page id="project_page" class="detail">
-            <p>I have plenty of projects going on</p>
-            <p>this is sometimes good <br> sometimes bad </p>
-            <p>but maybe you can help me!</p>
-            <p>scroll next to leave a feedback</p>
-            <p>or text me on my social</p>
-          </scroll-page>
-          <scroll-page id="contact_page" class="detail">
-            <p>you can leave a message explaining the problem you have</p>
-            <input type="message" name="feedback" id="fb"> insert your message here..</input>
-            <button type="button" name="send_message" onclick="handleClientLoad()">send</button> <br>
-            <p>we do not ask you any personal information</p>
-            <p>but in order to keep this possible <br> please limit your message to an introduction of your problem</p>
-            <p>we can always move the conversation to other platforms</p>
-          </scroll-page>
-        </scroll-container>
-      </div>
-      <div class="card social">
-        <p>
-          <a onclick="githubPage()" class="fa fa-github" aria-hidden="true"></a>
-          <a onclick="linkedinPage()" class="fa fa-linkedin"></a>
-          <a onclick="instaPage()" class="fa fa-instagram"></a>
-          <a onclick="facebookPage()" class="fa fa-facebook"></a>
-        </p>
-      </div>
-      <div class="card bio">
-        <p id="my_bio">Mandala</p>
-      </div>
+            <span style="display:block; height: 30vh;"></span>
+          </div>
+          <div class="deeper_info">
+            <img class="orig-image" src="./images/conegliano-colline.jpg" alt="conegliano-hills">
+            <h2 class="section-title">Origins</h2>
+            <p class="home-par" id="orig">
+              I come from a small town in the north-east part of Italy,
+              namely Conegliano Veneto in the province of Treviso, roughly
+              80km above Venice. This quiet village takes its popularity
+              from the worldwide success of Prosecco wine, which vines
+              decorate the surrounding hills, softening the valleys that lead
+              to Dolomiti mountains.
+            </p>
+            <hr>
+            <div class="video">
+              <!-- <iframe class="video_drone" src="https://www.youtube.com/embed?v=9TW61YU47Co">
+              </iframe> -->
+              <span style="color:red;">!!!!!video goes here!!!!</span>
+            </div>
+            <hr>
+            <p class="home-par" id="infantry">
+              With bumps and bandaging I managed to survive the earliest and
+              carefree period of life, culled by the supervision of people who were
+              responsible for my actions and BOY, I made use of that power. <br>
+              Loving parents, who provided for me with their best whenever
+              possible and with their impossible, when it'd worsen. I spent
+              most of my days with my mother, from which I took lineage and
+              customs.
+            </p>
+            <p class="home-par" id="youth">
+              I joined the <a href="http://www.isgalilei.edu.it">same high school</a>
+              that my father attended, 40 or some years prior, but with a twist:
+              I would have done Electronics and Telecommunications instead of Mechanics.
+              <br>
+              The choice proved fruitful, given the still raising demand for such
+              a skillset, completed with fundamentals of chemistry as well as
+              mechatronics. Through hands-on practice I developed my critical
+              thinking and problem solving techniques, which I used to lead and
+              give voice, in the role of student representative for two years.
+              In particular, I remember the struggle to introduce WiFi technologies
+              across the campus, the endless discussions on the effect of a
+              new span of frequencies on the students bodies and brains. Together
+              with my colleagues, we devised testing to compare the existing
+              exposition to radiations (e.g. CB radio for truck drivers), showing
+              the exponentially lower danger caused by the newcomer, compared to
+              its benefits.<br>
+
+              My father's and my degree, now with me, differ by 6 points and
+              he really never digested it. <br>
+
+              He used to come watch my football matches, hoping and gulping
+              with me. He was also the father of my step-sister, a
+              heart-warming mother with South-American origins. He is
+              unfortunately not with us anymore.
+            </p>
+            <p class="home-par" id="maturity">
+              I always thought I was made for something different. Despite
+              the inherent familiarity of spaces and seasons I grew up in,
+              I realized I was part of something bigger, I realized how small
+              I was in my own world and how little I knew about it. <br>
+              The unrest grew on me after my first job, I was controlled rather
+              than guided, scolded whenever possible, pushed to maximize efficiency
+              and never took seriously. Observing more experienced co-workers,
+              taking all that very same abuse for granted, turned me sour. <br>
+              At the first chance I took up a second job, collected enough money
+              to move away and started speaking about it. Fearing the shame of
+              a failed departure (I relied on this feeling, actually), after 6
+              months I moved to the Netherlands.
+            </p>
+            <hr>
+            <div id="AmsImg">
+              <span style="color:red;">add a picture of amsterdam</span>
+            </div>
+            <hr>
+            <p class="home-par" id="arrival">
+              Stepping out of my comfort zone felt necessary at that point,
+              I could no longer rely on other people to feel inspired and loved
+              so I sought for new places where my heart would feel home. <br>
+              It felt natural to pick the capital city, Amsterdam, as the
+              ground and sky to wrap my ideas. I had the chance to visit the city
+              twice before then, firstly with my mother and its running team, during
+              the 2012 Amsterdam Marathon and few years later with a friend, on a whim.
+              While the first time I often stepped aside to admire the uninterrupted
+              landscapes, framing clouds and their colors, running after them as
+              the wind blew them away, the second journey aimed to discover
+              the vibrant lifestyle of a metropoly and its culture. It was during
+              this later adventure that I felt a strange familiarity with Amsterdam:
+              my mind was at ease, my feet had new grounds to walk on, yet I knew
+              the path.
+            </p>
+            <p class="home-par" id="uni">
+              ...
+            </p>
+          </div>
+        </scroll-page>
+        <scroll-page id="projects_page">
+          <div class="page-header">
+            <p class="pr-title" id="">
+              I worked on multiple ideas, not only my own, <br>
+              to bring the power of technological advances to <br>
+              people who are ready to embrace them.
+            </p>
+            <p class="pr-title" id="">
+              Along with their development, I learned the importance of <br>
+              communication, in fact a key component driving cooperation <br>
+              in our societies. <br>
+            </p>
+            <p class="pr-title" id="">
+              To quote Henry Ford: <br> "If everyone is moving forward together, <br>
+              then success takes care of itself."
+            </p>
+            <span style="display:block; height: 30vh;"></span>
+          </div>
+          <div class="pr-root">
+            <div id="IT" class="pr-root-item">
+              Informational Technology
+            </div>
+            <div id="A&C" class="pr-root-item">
+              Arts and Crafts
+            </div>
+            <div id="WE" class="pr-root-item">
+              Web Education
+            </div>
+          </div>
+        </scroll-page>
+        <scroll-page id="news_page">
+          <div class="page-header">
+            <p>Growing up, to me, is an oxymoronic verb phrase.</p>
+            <p>The process of aging is so often tied to an increase in self-awareness,
+            that we tend to forget how small we are, nevertheless.</p>
+            <p>Alienating, yet relevant to all, this concept ultimately places
+              each individual within their community, related by affinities or filtered
+              by differences.
+            </p>
+            <p>This section aims at blurring the line between groups, show similarities
+            and foster empathy, through the power of journalism.</p>
+            <span style="display:block; height: 30vh;"></span>
+          </div>
+          <div class="deeper_info">
+            <div class="NSWE">
+              <h1>The North and the South, the East and the West</h1>
+              <p class="news-par" id=""></p>
+            </div>
+          </div>
+        </scroll-page>
+      </scroll-container>
     </div>
-  </body>
+    <div id="directions">scroll to dive in</div>
+  </div>
+  <footer>
+    <!-- <img id="footer-img" src="images/waves.png" alt="waves"> -->
+    <div class="social-grid">
+      <a onclick="githubPage()" class="fa fa-github" aria-hidden="true"></a>
+      <a onclick="linkedinPage()" class="fa fa-linkedin"></a>
+      <a onclick="instaPage()" class="fa fa-instagram"></a>
+      <a onclick="facebookPage()" class="fa fa-facebook"></a>
+    </div>
+  </footer>
+  <div id="website-info">
+    images and styles you see on this page are original and/or open source content,
+    you can find the code for it on my GitHub account
+  </div>
+  </div>
+</body>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R0TMS3G1KN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-R0TMS3G1KN');
+</script>
+ -->
 </html>

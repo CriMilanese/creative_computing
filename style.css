@@ -1,131 +1,224 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
 html {
   margin: 0;
   padding: 0;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url('images/background_web_cv2.png');
+  width: auto;
+  height: auto;
 }
 
 body {
+  display: block;
+  position: absolute;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Roboto', serif;
+  color: #000;
+  background-color: rgb(136, 217, 228);
+  line-height: normal;
   overflow: hidden;
-  width: 100%;
+  z-index: -3;
 }
 
-.grid {
+header {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20vh;
+  z-index: 3;
+}
+
+.topbar-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 10vh 40vh 30vh 20vh;
-  margin-left: 15%;
-  margin-right: auto;
-  max-width: 60%;
-  max-height: 99vh;
+  height: inherit;
+  width: 100%;
+  grid-template-columns: 20vw 20vw 20vw 20vw 20vw;
+}
+
+.navbar-toggler {
+  display: none;
+  grid-column: 4 / 5;
+}
+
+.navbar-nav {
+  display: flex;
+  padding: 0;
+  width: 100%;
+  flex-direction: row;
+  list-style-type: none;
+  grid-column: 2 / 5;
+}
+
+.nav-item {
+  margin: auto;
+  font-size: 3em;
+  cursor: pointer;
+}
+
+.nav-link {
+  --fill-color: #198CE6;
+  position: relative;
+  display: block;
+  padding: 4px 0;
+  font: 700 6vw Roboto, sans-serif;
+  text-decoration: none;
+  -webkit-text-stroke: 3px var(--fill-color);
+  background: linear-gradient(var(--fill-color) 0 100%) left / 0 no-repeat;
+  color: transparent;
+  background-clip: text;
+  transition: 0.5s linear;
+}
+
+.nav-link:hover {
+  background-size: 100%;
+}
+
+.active-link {
+  background-size: 100%;
+}
+
+#brand {
+  margin: auto;
+  font-size: 10vw;
+  color: black;
+}
+
+.cnv {
+  display: block;
+  position: absolute;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  z-index: -2;
+}
+
+.body-grid {
+  display: grid;
+  position: relative;
+  grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr;
+  grid-template-rows: 0.15fr 0.4fr 0.4fr 0.05fr;
+  margin: 10vh auto;
+  width: 60%;
+  height: 80%;
+  max-height: 100vh;
+  background-color: transparent;
+  z-index: 1;
 }
 
 .card {
   display: flex;
+  position: relative;
+  width: 100%;
   flex-direction: column;
-  max-width: inherit;
-  /* background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: rgba(255, 255, 255, 0); */
-}
-
-.navigator {
-  display: flex;
-  position: fixed;
-  background-color: green;
-  align-items: center;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  font-family: 'Source Serif Pro', serif;
-  text-align: right;
-  color: #000;
-  font-size: 2vw;
-  font-weight: bold;
-  margin: 0;
-  width: inherit;
+  background-color: inherit;
+  border-width: 0;
+  z-index: inherit;
 }
 
 scroll-container {
   display: inline-block;
   width: inherit;
+  height: 100%;
   overflow-x: scroll;
-  overflow-y: hidden;
+  background-color: inherit;
   scroll-behavior: smooth;
   white-space: nowrap;
-  scrollbar-width: none;
-  scrollbar-height: none;
   scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
 
 scroll-page {
   display: inline-block;
-  height: inherit;
+  height: 100%;
   width: 100%;
-  overflow: hidden;
+  white-space: inherit;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: inherit;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 /* works on Chrome, Opera and Safari*/
 scroll-container::-webkit-scrollbar {
   display: none;
 }
+
 /* works on Chrome, Opera and Safari*/
 scroll-page::-webkit-scrollbar {
   display: none;
 }
 
 
-.details {
-  grid-row-start: 2;
-  grid-row-end: 4;
-  grid-column-start: 2;
-  grid-column-end: 3;
-  font-family: 'Source Serif Pro', serif;
-  text-align: right;
-  color: #000;
-  font-size: 2vw;
-  font-weight: bold;
-  margin: 0;
- }
-
- .social {
-   color: #000000;
-   font-size: 160%;
-   margin: 0;
-   text-align: center;
-   grid-row-start: 4;
-   grid-row-end: 5;
-   grid-column-start: 1;
-   grid-column-end: 3;
- }
-
-p.detail {
-  margin: 5% 0;
+.pr-title {
+    font-size: 6vw;
 }
 
-#face{
- grid-row-start: 1;
- grid-row-end: 5;
- grid-column-start: 1;
- grid-column-end: 3;
- margin: 0;
- padding: 0;
- height: 100%;
- width: inherit;
+.pr-root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 4vw;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.pr-root-item {
+  display: block;
+  width: 50%;
+  border-radius: 50%;
+  background-color: hsla(195, 21%, 86%, 0.8);
+}
+
+.details {
+  grid-row: 2 / 4;
+  grid-column: 1 / 5;
+  text-align: right;
+  color: #000;
+  /* font-size: 2.5vw; */
+}
+
+.deeper_info {
+  margin-top: 20px;
+  text-align: left;
+  height: 0;
+  width: 100%;
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 200%;
+}
+
+p {
+  margin: 1em 0em;
+  white-space: normal;
+  word-wrap: break-word;
+  width: inherit;
+}
+
+.orig-image {
+  float: left;
+  width: 60%;
+  margin-right: 3%;
+}
+
+.video_drone {
+  height: 50%;
+  width: 100%;
 }
 
 #name {
+  margin: 0 0 4vh;
   font-size: 300%;
+  font-weight: bold;
   color: #000000;
-  margin: 8% 0 2% 0%;
   animation: opac 3s linear 2s;
   animation-direction: normal;
   animation-fill-mode: both;
@@ -140,7 +233,6 @@ p.detail {
   animation-iteration-count: 1;
 }
 
-
 #city {
   color: #000000;
   animation: opac 3s linear 4s;
@@ -149,7 +241,9 @@ p.detail {
   animation-iteration-count: 1;
 }
 
+
 #status {
+  margin-bottom: 6vh;
   color: #000000;
   animation: opac 3s linear 5s;
   animation-direction: normal;
@@ -157,40 +251,53 @@ p.detail {
   animation-iteration-count: 1;
 }
 
-.bio {
-  display: none;
-  grid-row-start: 2;
-  grid-row-end: 4;
-  grid-column-start: 2;
-  grid-column-end: 3;
-  color: #000000;
-  background-color: rgba(255,255,255,0);
-  font-family: 'Source Serif Pro', serif;
-  font-size: 2vw;
+#directions {
+  display:block;
+  position: relative;
+  grid-row: 4 / 5;
+  grid-column: 2 / 4;
   text-align: center;
-  vertical-align: middle;
-  margin: 15% 5%;
 }
 
-#my_bio {
-  margin: auto auto;
+footer {
+  display: block;
+  position: absolute;
+  max-width: 70%;
+  margin: 0 15%;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 15%;
+  z-index: 2;
+}
 
+.social-grid {
+  display: grid;
+  position: relative;
+  grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-items: center;
+  margin: 3vh auto 0% auto;
+  width: 100%;
+  height: 10vh;
+  font-size: 200%;
+  z-index: 2;
 }
 
 .fa {
-  padding: 1%;
-  width: 9%;
-  color: white;
+  display: block;
+  padding: 5% 0;
   text-align: center;
-  border-radius: 8%;
-  vertical-align: middle;
-  text-decoration: none;
+  width: 60px;
+  height: 30px;
+  border-radius: 15%;
 }
 
 .fa:hover {
-    opacity: 0.7;
-    box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
-      transform: translateY(-3px) scale(1.1);
+  opacity: 0.7;
+  box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+  transform: translateY(-3px) scale(1.1);
 }
 
 .fa-github {
@@ -198,67 +305,91 @@ p.detail {
   color: black;
 }
 
-.fa-facebook {
-  background: #3B5998;
-}
-
 .fa-linkedin {
-  background: #007bb5;
+  background: #0A66C2;
+  color: white;
 }
-
 
 .fa-instagram {
-  background: #125688;
+  background: #48BFFE;
+}
+
+.fa-facebook {
+  background: #1877F2;
+}
+
+#website-info {
+  display:block;
+  position: absolute;
+  bottom: 0;
+  left:0;
+  background-color: transparent;
+  width: 100%;
+  text-align:center;
+  font-size:14px;
+
 }
 
 /* for large screen, containers should stay in the center and stop scaling */
-@media screen and (min-width: 1350px) {
+@media screen and (min-width: 1150px) {
   .details {
     font-size: 28px;
   }
+}
 
-  #face {
-    margin-left: 0%;
+/* for bigger screen */
+@media screen and (min-width: 80vh) {
+  .details {
+    font-size: 1.6em;
   }
 }
 
 /* for smaller screens */
 @media screen and (max-width: 100vh) {
-  .grid {
-    margin-left: 0;
+  .body-grid {
+    width: 90%;
     max-width: 100%;
+    height: 70%;
+    margin: 15% auto;
+  }
+
+  footer {
+    width: 100%;
+    max-width: none;
+    margin: 0;
   }
 
   .details {
+    margin: 0 auto;
     grid-column-start: 1;
     text-align: right;
-    margin-top: 4vh;
-    font-size: 6vw;
-    padding-right: 0%;
+    /* font-size: 3vw; */
+    width: 90%;
   }
 
   p.detail {
-    margin:auto 0;
+    margin: auto 0;
   }
-
-  .card {
-
-  }
-
-  #face {
-    /* margin-left: 3%; */
-  }
-
 }
 
 @keyframes opac {
-  from {opacity: 0%;}
-  to {opacity: 100%;}
+  from {
+    opacity: 0%;
+  }
+
+  to {
+    opacity: 100%;
+  }
 }
 
 /* this creates problems because the margin enlarges the container and
 *  disrupts the whole structure of the page */
 @keyframes slide_in_left {
-  from {margin-left: 500px;}
-  to {margin-left: 0px;}
+  from {
+    margin-left: 500px;
+  }
+
+  to {
+    margin-left: 0px;
+  }
 }

@@ -32,5 +32,4 @@ $(function() {
   $('.fa-linkedin').hide().delay(7000).slideDown(300);
   $('.fa-instagram').hide().delay(8000).slideDown(300);
   $('.fa-facebook').hide().delay(9000).slideDown(300);
-  $('.bio').hide();
 });
