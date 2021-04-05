@@ -8,6 +8,8 @@ var cloud_index = 0, selected_cloud, pick;
 var wave_index = 0, selected_wave;
 const numbOfClouds = 13, numbOfWaves = 5;
 var inProgress = false;
+// the upper limit for the scroll animations with the waves to revert to the sky
+var SCROLLING_GAP = 0;
 
 function load_svg(){
   return new Promise((resolve, reject) => {
@@ -86,44 +88,55 @@ setTimeout(async function() {
 }, 300);
 
 function newTransPossible(){
+  console.log("resetting transition");
   inProgress = false;
 }
 
-function wobble(item){
-  console.log(item);
-}
+// function setSurfaceLimit(){
+//   if(SURFACE == -1){
+//     SURFACE = $(".deeper_info").get(0).getBoundingClientRect().top;
+//     console.log(SURFACE)
+//   }
+// }
+
 
 $(function(){
   loadBG();
-  $(".deeper_info").hide();
+  $("scroll-page").scrollTop(0);
+  SCROLLING_GAP = $("#scroll-gap").height();
   $("#page_filler").get(0).addEventListener("transitionend", newTransPossible, true);
   $("scroll-page").scroll(function(){
+    console.log(parseInt($(".deeper_info").get(0).getBoundingClientRect().top));
     if(!inProgress && $(".page-header").is(":visible")){
       inProgress = true;
-      // intro should disappear
-      $(".page-header").fadeOut();
       // directions to scroll should disappear
+      $("scroll-page").scrollTop(SCROLLING_GAP);
       $("#directions").slideUp();
       // social should disappear
       $(".social-grid").slideUp();
+      // intro should disappear
+      $(".page-header").slideUp(2500);
       // sea level should raise
       $("#svg841").css("bottom", "66vh");
       // a div expands to recreate sea bottom
       $("#page_filler").css("height", "66vh");
       // the grid adjusts to fit more info
-      $(".body-grid").delay(300).css("z-index", "3");
-      $(".details").delay(300).css("grid-row", "2 / 5");
-      $(".body-grid").delay(300).css("margin", "15vh auto 5vh");
+      $(".body-grid").delay(300).css("height", "85vh");
+      // $(".body-grid").delay(300).css("margin", "15vh auto 5vh");
       // the clouds fall behind the sea level
       $("#svg947").delay(300).css("z-index", "-1");
       // new info apper
-      // $(".deeper_info").delay(2000).slideDown(3000);
-      $(".deeper_info").delay(2000).effect("slide", { to: {height: "100%"} }, 10000, ()=>{console.log("i ma done");});
+      // setTimeout(() => {
+      //   setSurfaceLimit();
+      // }, 2000)
 
     } else if(!inProgress && $(".deeper_info").is(":visible")){
-      if($(".deeper_info").get(0).getBoundingClientRect().top > 299){
+      if($(".deeper_info").get(0).getBoundingClientRect().top > SCROLLING_GAP){
         console.log("going back");
         inProgress = true;
+        // $("scroll-page").animate({
+        //   scrollTop: $(".scroll-page").offset().top
+        // }, 100);
         // sea level should lower
         $("#svg841").css("bottom", "0");
         // a div expands to recreate sea bottom
@@ -132,17 +145,18 @@ $(function(){
         //change this with something better
         // it slides towards up but we want down
         // $(".deeper_info").slideUp();
+        $("scroll-page").scrollTop(SCROLLING_GAP);
 
-        $("deeper_info").delay(300).show("slide", {direction: "up"})
+        // height of grid goes back to normal, to give space to
+        // the footer
+        $(".body-grid").delay(300).css("height", "70vh");
 
-        $(".body-grid").delay(300).css("margin", "10vh auto");
-        $(".details").delay(300).css("grid-row", "2 / 4");
-        $(".body-grid").delay(300).css("z-index", "1");
-        // directions to scroll should disappear
-        $("#directions").delay(2500).slideDown();
-        // social should disappear
-        $(".social-grid").delay(2500).slideDown();
-        $(".page-header").delay(2500).fadeIn();
+        $(".page-header").slideDown(2500);
+
+        // directions to scroll should reappear
+        $("#directions").delay(3000).slideDown();
+        // social should reappear
+        $(".social-grid").delay(3000).slideDown();
       }
     }
   });

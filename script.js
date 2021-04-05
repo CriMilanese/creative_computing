@@ -5,7 +5,6 @@ async function scrollPage(elem){
 $(function() {
 
   let nav_link = document.querySelectorAll(".nav-link");
-  // $(".nav-item").click(scrollPage(this));
   const newsCallback = (entries) => {
     if(entries[0].isIntersecting){
       nav_link[2].classList.add("active-link");
