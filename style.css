@@ -10,7 +10,7 @@ html {
 
 body {
   display: block;
-  position: absolute;
+  position: fixed;
   margin: 0;
   width: 100vw;
   height: 100vh;
@@ -103,10 +103,10 @@ header {
   grid-template-rows: 0.15fr 0.4fr 0.4fr 0.05fr;
   margin: 10vh auto;
   width: 60%;
-  height: 80%;
+  height: 70vh;
   max-height: 100vh;
   background-color: transparent;
-  z-index: 1;
+  z-index: 0;
 }
 
 .card {
@@ -155,25 +155,41 @@ scroll-page::-webkit-scrollbar {
 
 
 .pr-title {
-    font-size: 6vw;
+    font-size: 1em;
 }
 
 .pr-root {
-  display: flex;
-  flex-direction: column;
+  display: block;
   position: relative;
+  /* position: relative; */
   width: 100%;
   height: 4vw;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 .pr-root-item {
-  display: block;
+  display: flex;
+  position: absolute;
   width: 50%;
+  height: 20vh;
   border-radius: 50%;
   background-color: hsla(195, 21%, 86%, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+#IT {
+  top: 20vh;
+  left: 0;
+}
+
+#AC {
+  top: 50vh;
+  left: 50vw;
+}
+
+#WE {
+  top: 60vh;
+  left: 5vw;
 }
 
 .details {
@@ -184,10 +200,16 @@ scroll-page::-webkit-scrollbar {
   /* font-size: 2.5vw; */
 }
 
+.page-header {
+  font-size: 1em;
+  height: 100%;
+}
+
 .deeper_info {
+  display: block;
+  position: relative;
   margin-top: 20px;
   text-align: left;
-  height: 0;
   width: 100%;
 }
 
@@ -349,7 +371,6 @@ footer {
   .body-grid {
     width: 90%;
     max-width: 100%;
-    height: 70%;
     margin: 15% auto;
   }
 
