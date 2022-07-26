@@ -11,35 +11,27 @@ var inProgress = false;
 // the upper limit for the scroll animations with the waves to revert to the sky
 var SCROLLING_GAP = 0;
 
-function load_svg(){
+function load_svg(path, parentID){
   return new Promise((resolve, reject) => {
-    xhr_sky = new XMLHttpRequest();
-    xhr_sea = new XMLHttpRequest();
-    xhr_sky.open("GET","images/sky.svg", true);
-    xhr_sea.open("GET","images/sea.svg", true);
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", path, true);
     // Following line is just to be on the safe side;
     // not needed if your server delivers SVG with correct MIME type
-    xhr_sky.overrideMimeType("image/svg+xml");
-    xhr_sea.overrideMimeType("image/svg+xml");
-    xhr_sky.onload = function(e) {
-      if(xhr_sky.readyState == 4){
-        document.getElementById("bg-img").appendChild(xhr_sky.responseXML.documentElement);
+    xhr.overrideMimeType("image/svg+xml");
+    xhr.onload = function(e) {
+      if(xhr.readyState == 4){
+        document.getElementById(parentID).appendChild(xhr.responseXML.documentElement);
       }
     }
-    xhr_sea.onload = function(e) {
-      if(xhr_sea.readyState == 4){
-        document.getElementById("bg-img").appendChild(xhr_sea.responseXML.documentElement);
-      }
-    }
-    xhr_sea.send(null);
-    xhr_sky.send(null);
+    xhr.send(null);
     resolve("svg are loaded");
   })
 }
 
 async function loadBG(){
   try {
-    const res = await load_svg();
+    await load_svg("images/sea.svg", "bg-img");
+    await load_svg("images/sky.svg", "bg-img");
   } catch (e) {
     console.log(e);
   }

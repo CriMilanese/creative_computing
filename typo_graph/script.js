@@ -32,7 +32,6 @@ function init(){
     textSize(256);
     let textLocX = (width/2) - (textWidth(txt[i])/2);
     let textLocY = (i+1)*height/3 - 50;
-    console.log(i+' LocX'+': '+textLocX+' '+' LocY'+': '+textLocY);
     points = points.concat(font.textToPoints(txt[i], textLocX, textLocY, 256));
   }
   for (let i = 0; i < points.length; i++) {
@@ -42,7 +41,7 @@ function init(){
 }
 
 function clearArray(){
-  for (let j = 0; agents.length != 0; j++) {
+  for (let j = agents.length; j > 0; j--) {
     agents.pop();
   }
 }
